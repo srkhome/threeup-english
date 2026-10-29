@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>兒童互動英語學習樂園：特別單元萬聖節</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Fredoka & Noto Sans TC -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pastelPink: '#FFD1DC',
+                        pastelBlue: '#C1E1C1', // soft mint/blue vibe
+                        pastelYellow: '#FFF1C5',
+                        pastelPurple: '#E2D9F3',
+                        pastelOrange: '#FFE5B4',
+                        softBackground: '#F9F8F6',
+                        cardBg: '#FFFFFF',
+                        primaryText: '#4A4A4A'
+                    },
+                    fontFamily: {
+                        sans: ['Fredoka', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F9F8F6;
+            color: #4A4A4A;
+            user-select: none;
+        }
+        .bouncy-card {
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+        }
+        .bouncy-card:active {
+            transform: scale(0.95);
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 209, 220, 0.7); }
+            50% { box-shadow: 0 0 0 15px rgba(255, 209, 220, 0); }
+        }
+        .speaking {
+            animation: pulse-glow 1.5s infinite;
+            background-color: #D1FAE5 !important;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .speaking { animation: none; }
+        }
+        button:focus-visible, [data-speak]:focus-visible { outline: 3px solid #6366f1; outline-offset: 2px; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen pb-20">
+
+    <!-- 頂部導航 Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50 px-4 py-3 flex items-center justify-between border-b border-gray-100">
+        <div class="flex items-center space-x-2">
+            <span class="text-3xl">🌟</span>
+            <h1 class="text-xl font-bold text-gray-700 tracking-wide">English Kids Fun</h1>
+        </div>
+        <div class="flex items-center space-x-3 bg-pastelYellow px-3 py-1.5 rounded-full shadow-inner">
+            <span class="text-xl">⭐</span>
+            <span id="star-count" class="font-bold text-amber-700 text-lg">0</span>
+        </div>
+    </header>
+
+    <!-- 主要內容區塊 -->
+    <main class="flex-1 max-w-md w-full mx-auto p-4 mb-16" id="main-container">
+
+        <!-- 首頁 / 歡迎儀表板 -->
+        <section id="tab-home" class="space-y-6">
+            <div class="bg-gradient-to-r from-pastelPink to-pastelOrange p-6 rounded-3xl shadow-sm text-center relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 text-7xl opacity-35">🚀</div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Hello,小朋友！</h2>
+                <p class="text-gray-600 text-sm mb-4">今天想學習什麼有趣的英文呢？點擊下方單元開始冒險吧！</p>
+                <button onclick="switchTab('abc')" class="bg-white text-gray-700 font-bold px-6 py-3 rounded-full shadow-md hover:bg-gray-50 transition transform hover:-translate-y-0.5">
+                    開始學習 🎯
+                </button>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div onclick="switchTab('abc')" role="button" tabindex="0" class="bg-pastelBlue bg-opacity-40 p-5 rounded-2xl shadow-sm cursor-pointer bouncy-card border-2 border-emerald-100 text-center flex flex-col items-center justify-center">
+                    <span class="text-4xl mb-2">🔤</span>
+                    <h3 class="font-bold text-gray-700 text-lg">Unit 1: ABC Time</h3>
+                    <p class="text-xs text-gray-500 mt-1">字母與單字自然發音</p>
+                </div>
+                <div onclick="switchTab('talk')" role="button" tabindex="0" class="bg-pastelPink bg-opacity-40 p-5 rounded-2xl shadow-sm cursor-pointer bouncy-card border-2 border-pink-100 text-center flex flex-col items-center justify-center">
+                    <span class="text-4xl mb-2">💬</span>
+                    <h3 class="font-bold text-gray-700 text-lg">Unit 2: Daily Talk</h3>
+                    <p class="text-xs text-gray-500 mt-1">實用生活對話與句型</p>
+                </div>
+                <div onclick="switchTab('festival')" role="button" tabindex="0" class="bg-pastelPurple bg-opacity-40 p-5 rounded-2xl shadow-sm cursor-pointer bouncy-card border-2 border-purple-100 text-center flex flex-col items-center justify-center">
+                    <span class="text-4xl mb-2">🎃</span>
+                    <h3 class="font-bold text-gray-700 text-lg">Unit 3: Festival</h3>
+                    <p class="text-xs text-gray-500 mt-1">萬聖節派對與趣味單字</p>
+                </div>
+                <div onclick="switchTab('game')" role="button" tabindex="0" class="bg-pastelYellow bg-opacity-50 p-5 rounded-2xl shadow-sm cursor-pointer bouncy-card border-2 border-amber-100 text-center flex flex-col items-center justify-center">
+                    <span class="text-4xl mb-2">🎮</span>
+                    <h3 class="font-bold text-gray-700 text-lg">語音小測驗</h3>
+                    <p class="text-xs text-gray-500 mt-1">聽音辨位賺星星獎勵</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Unit 1: ABC Time -->
+        <section id="tab-abc" class="hidden space-y-4">
+            <div class="flex items-center justify-between bg-pastelBlue bg-opacity-30 p-4 rounded-2xl">
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800">🔤 ABC Time 字母時間</h2>
+                    <p class="text-xs text-gray-500">點擊卡片聽標準發音，跟著大聲唸出來！</p>
+                </div>
+                <button id="abc-play-btn" onclick="playAllABC()" class="bg-emerald-500 text-white px-3 py-2 rounded-xl text-xs font-bold shadow hover:bg-emerald-600 flex items-center space-x-1 shrink-0">
+                    <i class="fa-solid fa-play" id="abc-play-icon"></i><span id="abc-play-text">自動連播</span>
+                </button>
+            </div>
+
+            <!-- ABC 網格列表 -->
+            <div id="abc-grid" class="grid grid-cols-2 gap-3">
+                <!-- JS 動態生成 -->
+            </div>
+        </section>
+
+        <!-- Unit 2: Daily Talk -->
+        <section id="tab-talk" class="hidden space-y-4">
+            <div class="bg-pastelPink bg-opacity-30 p-4 rounded-2xl">
+                <h2 class="text-xl font-bold text-gray-800">💬 Daily Talk 生活日常對話</h2>
+                <p class="text-xs text-gray-500">學習課本核心句型：「What's this?」、「What's your name?」、「How old are you?」</p>
+            </div>
+
+            <div id="talk-list" class="space-y-3">
+                <!-- JS 動態生成對話場景 -->
+            </div>
+        </section>
+
+        <!-- Unit 3: Festival (Halloween) -->
+        <section id="tab-festival" class="hidden space-y-4">
+            <div class="bg-pastelPurple bg-opacity-30 p-4 rounded-2xl">
+                <h2 class="text-xl font-bold text-gray-800">🎃 Festival 萬聖節派對</h2>
+                <p class="text-xs text-gray-500">探索萬聖節單字與驚奇有趣的對話情境！</p>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-purple-100">
+                <h3 class="font-bold text-gray-700 mb-3 text-sm flex items-center"><span class="mr-2">👻</span> 萬聖節主題單字</h3>
+                <div id="festival-words" class="grid grid-cols-2 gap-3">
+                    <!-- JS 生成 -->
+                </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-purple-100">
+                <h3 class="font-bold text-gray-700 mb-3 text-sm flex items-center"><span class="mr-2">🦇</span> 萬聖節趣味情境對話</h3>
+                <div id="festival-talks" class="space-y-3">
+                    <!-- JS 生成 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Unit 4: Game & Quiz -->
+        <section id="tab-game" class="hidden space-y-4">
+            <div class="bg-pastelYellow bg-opacity-50 p-4 rounded-2xl">
+                <h2 class="text-xl font-bold text-gray-800">🎮 聽音選圖大挑戰</h2>
+                <p class="text-xs text-gray-500">聆聽語音提示，選出正確的圖片或單字，賺取星星獎勵！</p>
+            </div>
+
+            <div id="game-card" class="bg-white p-6 rounded-3xl shadow-md text-center space-y-6 border border-amber-100">
+                <div id="game-question-area" class="py-6">
+                    <button id="game-speak-btn" onclick="playCurrentQuizAudio()" aria-label="播放題目發音" class="w-24 h-24 bg-amber-100 text-amber-600 rounded-full text-4xl shadow-inner mx-auto flex items-center justify-center hover:bg-amber-200 transition bouncy-card">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+                    <p class="text-sm text-gray-500 mt-4">點擊擴音器聆聽發音，然後在下方選擇正確答案</p>
+                </div>
+
+                <div id="game-options" class="grid grid-cols-2 gap-3">
+                    <!-- 選項按鈕 -->
+                </div>
+
+                <div id="game-feedback" role="status" aria-live="polite" class="text-lg font-bold min-h-[30px]"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 底部導航欄 Bottom Navigation -->
+    <nav aria-label="分頁導航" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg py-2 px-4 flex justify-around items-center z-50 max-w-md mx-auto">
+        <button onclick="switchTab('home')" id="nav-home" aria-current="page" class="flex flex-col items-center text-pink-500 transition">
+            <i class="fa-solid fa-house text-xl mb-1"></i>
+            <span class="text-[10px] font-bold">首頁</span>
+        </button>
+        <button onclick="switchTab('abc')" id="nav-abc" class="flex flex-col items-center text-gray-400 transition">
+            <i class="fa-solid fa-font text-xl mb-1"></i>
+            <span class="text-[10px] font-bold">ABC</span>
+        </button>
+        <button onclick="switchTab('talk')" id="nav-talk" class="flex flex-col items-center text-gray-400 transition">
+            <i class="fa-solid fa-comments text-xl mb-1"></i>
+            <span class="text-[10px] font-bold">對話</span>
+        </button>
+        <button onclick="switchTab('festival')" id="nav-festival" class="flex flex-col items-center text-gray-400 transition">
+            <i class="fa-solid fa-hat-wizard text-xl mb-1"></i>
+            <span class="text-[10px] font-bold">節慶</span>
+        </button>
+        <button onclick="switchTab('game')" id="nav-game" class="flex flex-col items-center text-gray-400 transition">
+            <i class="fa-solid fa-gamepad text-xl mb-1"></i>
+            <span class="text-[10px] font-bold">小遊戲</span>
+        </button>
+    </nav>
+
+    <!-- 提示音框 / Toast 訊息 -->
+    <div id="toast" role="status" aria-live="polite" class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-full text-xs opacity-0 transition-opacity pointer-events-none z-50 shadow-md">
+        提示訊息
+    </div>
+
+    <!-- JavaScript 邏輯與語音控制 -->
+    <script>
+        // 資料集：整合課本內容
+        const abcData = [
+            { letter: 'Aa', word: 'ant', zh: '螞蟻', emoji: '🐜' },
+            { letter: 'Bb', word: 'bag', zh: '包包', emoji: '👜' },
+            { letter: 'Cc', word: 'cat', zh: '貓咪', emoji: '🐱' },
+            { letter: 'Dd', word: 'dog', zh: '狗狗', emoji: '🐶' },
+            { letter: 'Ee', word: 'egg', zh: '雞蛋', emoji: '🥚' },
+            { letter: 'Ff', word: 'fish', zh: '魚', emoji: '🐟' },
+            { letter: 'Gg', word: 'goat', zh: '山羊', emoji: '🐐' },
+            { letter: 'Hh', word: 'hand', zh: '手', emoji: '✋' },
+            { letter: 'Ii', word: 'ink', zh: '墨水', emoji: '🖋️' },
+            { letter: 'Jj', word: 'jet', zh: '噴射機', emoji: '✈️' },
+            { letter: 'Kk', word: 'key', zh: '鑰匙', emoji: '🔑' },
+            { letter: 'Ll', word: 'lion', zh: '獅子', emoji: '🦁' },
+            { letter: 'Mm', word: 'monkey', zh: '猴子', emoji: '🐵' },
+            { letter: 'Nn', word: 'nose', zh: '鼻子', emoji: '👃' },
+            { letter: 'Oo', word: 'ox', zh: '公牛', emoji: '🐂' },
+            { letter: 'Pp', word: 'pig', zh: '豬', emoji: '🐷' },
+            { letter: 'Qq', word: 'queen', zh: '女王', emoji: '👑' },
+            { letter: 'Rr', word: 'red', zh: '紅色', emoji: '🔴' },
+            { letter: 'Ss', word: 'snake', zh: '蛇', emoji: '🐍' },
+            { letter: 'Tt', word: 'turtle', zh: '烏龜', emoji: '🐢' },
+            { letter: 'Uu', word: 'up', zh: '向上/熱氣球', emoji: '🎈' },
+            { letter: 'Vv', word: 'van', zh: '廂型車', emoji: '🚐' },
+            { letter: 'Ww', word: 'watch', zh: '手錶', emoji: '⌚' },
+            { letter: 'Xx', word: 'fox', zh: '狐狸', emoji: '🦊' },
+            { letter: 'Yy', word: 'yo-yo', zh: '溜溜球', emoji: '🪀' },
+            // zoo 原本和 lion 都用 🦁，測驗時兩個選項圖示會一模一樣，所以改用大象（與單元四一致）
+            { letter: 'Zz', word: 'zoo', zh: '動物園', emoji: '🐘' }
+        ];
+
+        const talkData = [
+            { en: "What's this?", zh: "這是什麼？", icon: "❓" },
+            { en: "It's an eraser.", zh: "這是一個橡皮擦。", icon: "🧽" },
+            { en: "It's a stone.", zh: "這是一顆石頭。", icon: "🪨" },
+            { en: "It's a marker.", zh: "這是一隻麥克筆。", icon: "🖍️" },
+            { en: "What's your name?", zh: "你叫什麼名字？", icon: "📛" },
+            { en: "My name is Andy.", zh: "我的名字叫安迪。", icon: "👦" },
+            { en: "How old are you?", zh: "你幾歲？", icon: "🎂" },
+            { en: "I'm nine years old.", zh: "我九歲。", icon: "🎈" }
+        ];
+
+        const festivalWords = [
+            { en: "bat", zh: "蝙蝠", emoji: "🦇" },
+            { en: "ghost", zh: "鬼魂", emoji: "👻" },
+            { en: "pumpkin", zh: "南瓜", emoji: "🎃" },
+            { en: "spider", zh: "蜘蛛", emoji: "🕷️" },
+            { en: "witch", zh: "女巫", emoji: "🧙‍♀️" },
+            { en: "vampire", zh: "吸血鬼", emoji: "🧛‍♂️" }
+        ];
+
+        const festivalTalks = [
+            { en: "Happy Halloween!", zh: "萬聖節快樂！", icon: "🎃" },
+            { en: "Trick or treat!", zh: "不給糖就搗蛋！", icon: "🍬" },
+            { en: "Wow! A vampire! Good job!", zh: "哇！吸血鬼！做得好！", icon: "👏" },
+            { en: "It's not red. It's black.", zh: "這不是紅色的。這是黑色的。", icon: "🖤" }
+        ];
+
+        // 轉義 HTML 屬性內容。朗讀文字放在 data-speak，而不是塞進 onclick 字串，
+        // 這樣 What's、It's、I'm 這類含撇號的句子才不會造成語法錯誤。
+        function esc(s) {
+            return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        let stars = 0;
+        let currentQuiz = null;
+        let quizLocked = false;
+        let quizTimer = null;
+        const heardTexts = new Set(); // 每個項目本次只有第一次聆聽得 1 顆星，避免狂點刷星星
+
+        // --- Web Speech API ---
+        const synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
+        let speakToken = 0;
+        let speakingEl = null;
+        let toastTimer = null;
+        let abcPlaying = false;
+        let abcIndex = 0;
+
+        function clearSpeaking() {
+            if (speakingEl) {
+                speakingEl.classList.remove('speaking');
+                speakingEl = null;
+            }
+        }
+
+        function stopSpeech() {
+            speakToken++;
+            if (synth) synth.cancel();
+            clearSpeaking();
+        }
+
+        /* 共用的朗讀函式。每次朗讀有獨立編號，被取消的舊朗讀事件會被忽略。 */
+        function speak(text, { el = null, rate = 0.9, onDone = null } = {}) {
+            if (!synth) {
+                showToast("您的瀏覽器不支援語音功能");
+                return;
+            }
+            const token = ++speakToken;
+            synth.cancel(); // 停止先前的發音
+            clearSpeaking();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = rate; // 適合兒童的稍慢語速
+
+            if (el) {
+                el.classList.add('speaking');
+                speakingEl = el;
+            }
+
+            utterance.onend = () => {
+                if (token !== speakToken) return;
+                clearSpeaking();
+                if (onDone) onDone();
+            };
+            utterance.onerror = (e) => {
+                if (token !== speakToken) return;
+                clearSpeaking();
+                if (e && e.error && e.error !== 'canceled' && e.error !== 'interrupted') {
+                    showToast("語音播放失敗，請再試一次");
+                }
+            };
+
+            synth.speak(utterance);
+        }
+
+        /* 使用者點擊單一項目：朗讀，並在第一次聆聽時給 1 顆星 */
+        function speakText(text, el = null, reward = true) {
+            if (abcPlaying) {
+                abcPlaying = false;
+                updateABCButton();
+            }
+            speak(text, { el });
+            if (reward && !heardTexts.has(text)) {
+                heardTexts.add(text);
+                addStar(1);
+            }
+        }
+
+        // 顯示提示訊息
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.style.opacity = '1';
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 2000);
+        }
+
+        // 星星獎勵增加
+        function addStar(amount) {
+            stars += amount;
+            document.getElementById('star-count').innerText = stars;
+        }
+
+        // 標籤頁切換
+        function switchTab(tabId) {
+            stopABC();
+            stopSpeech();
+            clearTimeout(quizTimer);
+
+            const tabs = ['home', 'abc', 'talk', 'festival', 'game'];
+            tabs.forEach(t => {
+                document.getElementById(`tab-${t}`).classList.add('hidden');
+                const navBtn = document.getElementById(`nav-${t}`);
+                if (navBtn) {
+                    navBtn.classList.remove('text-pink-500');
+                    navBtn.classList.add('text-gray-400');
+                    navBtn.removeAttribute('aria-current');
+                }
+            });
+
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if (activeNav) {
+                activeNav.classList.remove('text-gray-400');
+                activeNav.classList.add('text-pink-500');
+                activeNav.setAttribute('aria-current', 'page');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (tabId === 'game') {
+                nextQuiz(true);
+            }
+        }
+
+        // 渲染 ABC 清單
+        function renderABC() {
+            const grid = document.getElementById('abc-grid');
+            grid.innerHTML = abcData.map(item => `
+                <div data-speak="${esc(item.word)}" role="button" tabindex="0" class="bg-white p-3 rounded-2xl shadow-sm border border-emerald-100 flex items-center space-x-3 cursor-pointer bouncy-card hover:bg-emerald-50 transition">
+                    <span class="text-3xl">${item.emoji}</span>
+                    <div>
+                        <div class="font-bold text-gray-800 text-base">${item.letter} - ${item.word}</div>
+                        <div class="text-xs text-gray-500">${item.zh}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 自動連播 ABC：一個念完才念下一個，可隨時停止
+        function updateABCButton() {
+            document.getElementById('abc-play-text').innerText = abcPlaying ? "停止連播" : "自動連播";
+            document.getElementById('abc-play-icon').className = abcPlaying ? "fa-solid fa-stop" : "fa-solid fa-play";
+        }
+
+        function stopABC() {
+            if (!abcPlaying) return;
+            abcPlaying = false;
+            updateABCButton();
+        }
+
+        function playAllABC() {
+            if (abcPlaying) {
+                stopABC();
+                stopSpeech();
+                return;
+            }
+            if (!synth) {
+                showToast("您的瀏覽器不支援語音功能");
+                return;
+            }
+            abcPlaying = true;
+            abcIndex = 0;
+            updateABCButton();
+            showToast("開始自動連播 ABC...");
+            playNextABC();
+        }
+
+        function playNextABC() {
+            if (!abcPlaying) return;
+            if (abcIndex >= abcData.length) {
+                abcPlaying = false;
+                updateABCButton();
+                return;
+            }
+            const item = abcData[abcIndex];
+            const card = document.querySelectorAll('#abc-grid [data-speak]')[abcIndex];
+            if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // 只念單一字母（A）與單字，避免把 "Aa" 念成怪聲音
+            speak(`${item.letter[0]}. ${item.word}`, {
+                el: card,
+                rate: 0.85,
+                onDone: () => {
+                    abcIndex++;
+                    setTimeout(playNextABC, 400);
+                }
+            });
+        }
+
+        // 渲染 Daily Talk
+        function renderTalk() {
+            document.getElementById('talk-list').innerHTML = talkData.map(item => `
+                <div data-speak="${esc(item.en)}" role="button" tabindex="0" class="bg-white p-4 rounded-2xl shadow-sm border border-pink-100 flex items-center justify-between cursor-pointer bouncy-card hover:bg-pink-50 transition">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-2xl">${item.icon}</span>
+                        <div>
+                            <div class="font-bold text-gray-800 text-base">${item.en}</div>
+                            <div class="text-xs text-gray-500">${item.zh}</div>
+                        </div>
+                    </div>
+                    <span class="text-pink-400 p-2"><i class="fa-solid fa-volume-high text-lg"></i></span>
+                </div>
+            `).join('');
+        }
+
+        // 渲染 Festival
+        function renderFestival() {
+            document.getElementById('festival-words').innerHTML = festivalWords.map(item => `
+                <div data-speak="${esc(item.en)}" role="button" tabindex="0" class="bg-purple-50 p-3 rounded-2xl border border-purple-100 flex items-center space-x-3 cursor-pointer bouncy-card hover:bg-purple-100 transition">
+                    <span class="text-3xl">${item.emoji}</span>
+                    <div>
+                        <div class="font-bold text-gray-800 text-sm">${item.en}</div>
+                        <div class="text-xs text-gray-500">${item.zh}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('festival-talks').innerHTML = festivalTalks.map(item => `
+                <div data-speak="${esc(item.en)}" role="button" tabindex="0" class="bg-purple-50 p-3 rounded-2xl border border-purple-100 flex items-center justify-between cursor-pointer bouncy-card hover:bg-purple-100 transition">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-2xl">${item.icon}</span>
+                        <div>
+                            <div class="font-bold text-gray-800 text-sm">${item.en}</div>
+                            <div class="text-xs text-gray-500">${item.zh}</div>
+                        </div>
+                    </div>
+                    <span class="text-purple-400"><i class="fa-solid fa-volume-high"></i></span>
+                </div>
+            `).join('');
+        }
+
+        // 點擊任何帶有 data-speak 的卡片就朗讀；也支援鍵盤 Enter / 空白鍵
+        document.addEventListener('click', e => {
+            const el = e.target.closest('[data-speak]');
+            if (el) speakText(el.dataset.speak, el);
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            const el = e.target.closest && e.target.closest('[role="button"]');
+            if (el && el === e.target) {
+                e.preventDefault();
+                el.click();
+            }
+        });
+
+        // --- 小遊戲 ---
+        function playCurrentQuizAudio() {
+            if (currentQuiz) {
+                speakText(currentQuiz.word, document.getElementById('game-speak-btn'), false);
+            }
+        }
+
+        function nextQuiz(autoPlay = true) {
+            clearTimeout(quizTimer);
+            quizLocked = false;
+            document.getElementById('game-feedback').innerText = '';
+
+            // 隨機選一個 ABC 或 Festival 單字作為題目（festival 單字的欄位是 en，統一成 word）
+            const pool = [
+                ...abcData.map(i => ({ word: i.word, emoji: i.emoji })),
+                ...festivalWords.map(i => ({ word: i.en, emoji: i.emoji }))
+            ];
+
+            let picked;
+            do {
+                picked = pool[Math.floor(Math.random() * pool.length)];
+            } while (currentQuiz && picked.word === currentQuiz.word); // 不連續出同一題
+            currentQuiz = picked;
+
+            // 產生 3 個錯誤選項 + 1 個正確選項
+            const options = [currentQuiz];
+            while (options.length < 4) {
+                const randomItem = pool[Math.floor(Math.random() * pool.length)];
+                if (!options.some(o => o.word === randomItem.word)) {
+                    options.push(randomItem);
+                }
+            }
+            options.sort(() => Math.random() - 0.5);
+
+            const optionsContainer = document.getElementById('game-options');
+            optionsContainer.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "quiz-opt bg-pastelYellow bg-opacity-40 border-2 border-amber-200 p-4 rounded-2xl shadow-sm text-center bouncy-card hover:bg-amber-100 transition flex flex-col items-center justify-center";
+                btn.innerHTML = `
+                    <span class="text-4xl mb-1">${opt.emoji}</span>
+                    <span class="font-bold text-gray-700 text-sm">${esc(opt.word)}</span>
+                `;
+                btn.addEventListener('click', () => checkAnswer(btn, opt.word));
+                optionsContainer.appendChild(btn);
+            });
+
+            // 網頁剛開啟時不自動發音；學生進入小遊戲或答對換題時才自動播放
+            if (autoPlay) playCurrentQuizAudio();
+        }
+
+        function checkAnswer(btn, selectedWord) {
+            if (quizLocked) return;
+            const feedback = document.getElementById('game-feedback');
+
+            if (selectedWord === currentQuiz.word) {
+                quizLocked = true; // 避免在等待換題的 1.5 秒內重複得星星
+                document.querySelectorAll('.quiz-opt').forEach(b => { b.disabled = true; });
+                btn.classList.add('bg-emerald-100');
+                feedback.innerHTML = '<span class="text-emerald-600">🎉 太棒了！答對囉！+2 ⭐</span>';
+                addStar(2);
+                speak("Great job!");
+                quizTimer = setTimeout(() => nextQuiz(true), 1500);
+            } else {
+                btn.disabled = true;
+                btn.classList.add('opacity-50');
+                feedback.innerHTML = '<span class="text-rose-500">❌ 哎呀，再聽一次試試看！</span>';
+                speak("Try again!");
+            }
+        }
+
+        // 初始化渲染
+        window.addEventListener('DOMContentLoaded', () => {
+            renderABC();
+            renderTalk();
+            renderFestival();
+            nextQuiz(false);
+        });
+    </script>
+</body>
+</html>

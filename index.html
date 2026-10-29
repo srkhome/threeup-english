@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#FFF8E7">
+    <meta name="description" content="翰林115三上英文互動學習網：單元一到單元四與萬聖節特別單元，可用手機、平板與電腦學習。">
+    <title>翰林115三上英文 互動學習網</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper: #FFF8E7;
+            --ink: #2E3A4B;
+            --ink-soft: #5C6878;
+            --sky: #6DB6F0;
+            --mint: #62C58B;
+            --sun: #F2B93B;
+            --coral: #F27B6B;
+            --grape: #9C7BE0;
+            --font: 'Fredoka', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Heiti TC', system-ui, sans-serif;
+        }
+        * { box-sizing: border-box; }
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            min-height: 100dvh;
+            font-family: var(--font);
+            color: var(--ink);
+            background-color: var(--paper);
+            /* 英文習字用的四線格：藍線＋中間一條紅色虛線 */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='140'%3E%3Cg fill='none' stroke-width='1.6'%3E%3Cpath d='M0 24H120M0 48H120M0 96H120' stroke='%23BFDDF7'/%3E%3Cpath d='M0 72H120' stroke='%23F4B4B4' stroke-dasharray='7 6'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 120px 140px;
+            padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+            overflow-x: hidden;
+        }
+
+        /* ---------- 背景裝飾：字母積木與文具 ---------- */
+        .bg {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .blk {
+            --s: clamp(44px, 7.5vw, 92px);
+            position: absolute;
+            display: grid;
+            place-items: center;
+            width: var(--s);
+            height: var(--s);
+            border-radius: 20%;
+            color: #fff;
+            font-weight: 700;
+            font-size: calc(var(--s) * 0.58);
+            line-height: 1;
+            box-shadow: 0 calc(var(--s) * 0.08) 0 rgba(46, 58, 75, 0.18);
+        }
+        .b1 { top: 5%;  left: 3%;  background: var(--sky);   transform: rotate(-10deg); }
+        .b2 { top: 20%; right: 3%; background: var(--sun);   transform: rotate(8deg); }
+        .b3 { top: 56%; left: 2%;  background: var(--coral); transform: rotate(6deg); }
+        .b4 { bottom: 7%; right: 4%; background: var(--mint); transform: rotate(-8deg); }
+        .b5 { bottom: 14%; left: 8%; background: var(--grape); transform: rotate(-4deg); }
+
+        .doo { position: absolute; height: auto; }
+        .pencil { width: clamp(110px, 16vw, 210px); left: 6%; top: 40%; transform: rotate(-24deg); }
+        .apple  { width: clamp(44px, 6vw, 80px);   right: 9%; top: 46%; transform: rotate(10deg); }
+        .book   { width: clamp(64px, 9vw, 120px);  right: 18%; bottom: 3%; transform: rotate(-6deg); }
+        .star   { width: clamp(30px, 4vw, 54px);   left: 20%; top: 8%; transform: rotate(14deg); }
+        .star.s2 { left: auto; right: 24%; top: 12%; transform: rotate(-12deg); width: clamp(22px, 3vw, 40px); }
+
+        @media (max-width: 639px) {
+            .pencil, .book, .b5 { display: none; }
+        }
+
+        /* ---------- 版面 ---------- */
+        .page {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: clamp(16px, 4vw, 40px) clamp(14px, 4vw, 32px) clamp(28px, 5vw, 56px);
+        }
+
+        .hero {
+            text-align: center;
+            background: rgba(255, 248, 231, 0.94);
+            border: 3px solid var(--ink);
+            border-radius: clamp(22px, 4vw, 36px);
+            padding: clamp(22px, 5vw, 44px) clamp(16px, 4vw, 40px);
+            box-shadow: 0 8px 0 var(--ink);
+            margin-bottom: clamp(22px, 4vw, 40px);
+        }
+        .kicker {
+            display: inline-block;
+            margin: 0 0 12px;
+            padding: 4px 16px;
+            background: var(--sun);
+            border-radius: 999px;
+            font-size: clamp(0.8rem, 2.4vw, 1rem);
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+        h1 {
+            margin: 0;
+            font-size: clamp(2.2rem, 9vw, 4.6rem);
+            line-height: 1.15;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+        .lead {
+            margin: 12px 0 0;
+            font-size: clamp(1rem, 3vw, 1.35rem);
+            color: var(--ink-soft);
+            font-weight: 500;
+        }
+
+        .pick {
+            margin: 0 0 14px;
+            text-align: center;
+            font-size: clamp(0.95rem, 2.6vw, 1.15rem);
+            font-weight: 600;
+        }
+        .pick span {
+            display: inline-block;
+            background: rgba(255, 248, 231, 0.94);
+            padding: 4px 16px;
+            border-radius: 999px;
+        }
+
+        /* ---------- 單元卡片 ---------- */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: clamp(12px, 2.4vw, 22px);
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .card {
+            --c: var(--sky);
+            --tint: #DCEFFF;
+            display: flex;
+            align-items: center;
+            gap: clamp(12px, 2.4vw, 20px);
+            height: 100%;
+            padding: clamp(14px, 2.6vw, 22px);
+            background: var(--tint);
+            border: 3px solid var(--ink);
+            border-radius: 24px;
+            box-shadow: 0 6px 0 var(--ink);
+            color: inherit;
+            text-decoration: none;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 9px 0 var(--ink); }
+        .card:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--ink); }
+        .card:focus-visible { outline: 4px solid #2563eb; outline-offset: 4px; }
+
+        .c1 { --c: var(--sky);   --tint: #DCEFFF; }
+        .c2 { --c: var(--mint);  --tint: #DDF5E3; }
+        .c3 { --c: var(--sun);   --tint: #FFF0C2; }
+        .c4 { --c: var(--coral); --tint: #FFE1DC; }
+        .c5 { --c: var(--grape); --tint: #EADFFB; }
+
+        .num {
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            width: clamp(56px, 11vw, 84px);
+            height: clamp(56px, 11vw, 84px);
+            background: var(--c);
+            color: #fff;
+            border: 3px solid var(--ink);
+            border-radius: 20px;
+            font-size: clamp(1.9rem, 6vw, 2.9rem);
+            font-weight: 700;
+            line-height: 1;
+            transform: rotate(-5deg);
+        }
+        .txt { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+        .label { font-size: 0.85rem; font-weight: 600; color: var(--ink-soft); }
+        .name { font-size: clamp(1.2rem, 3.6vw, 1.6rem); font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; }
+        .zh { font-size: clamp(0.9rem, 2.6vw, 1rem); color: var(--ink-soft); font-weight: 500; line-height: 1.4; }
+        .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+        .chips span {
+            padding: 2px 10px;
+            background: rgba(255, 255, 255, 0.85);
+            border: 2px solid rgba(46, 58, 75, 0.25);
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .go {
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            width: 40px;
+            height: 40px;
+            background: var(--ink);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.9rem;
+            padding-left: 3px;
+        }
+
+        /* 平板：兩欄；最後一張撐滿一整列 */
+        @media (min-width: 640px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
+            .grid li:last-child { grid-column: 1 / -1; }
+        }
+        /* 桌機：第一列三張、第二列兩張 */
+        @media (min-width: 1000px) {
+            .grid { grid-template-columns: repeat(6, 1fr); }
+            .grid li { grid-column: span 2; }
+            .grid li:nth-child(4), .grid li:nth-child(5) { grid-column: span 3; }
+            .card { flex-direction: column; align-items: flex-start; }
+            .grid li:nth-child(4) .card, .grid li:nth-child(5) .card { flex-direction: row; align-items: center; }
+            .go { align-self: flex-end; }
+            .grid li:nth-child(4) .go, .grid li:nth-child(5) .go { align-self: center; }
+        }
+
+        footer {
+            margin-top: clamp(22px, 4vw, 40px);
+            text-align: center;
+            font-size: clamp(0.85rem, 2.4vw, 1rem);
+            font-weight: 500;
+        }
+        footer span {
+            display: inline-block;
+            background: rgba(255, 248, 231, 0.94);
+            padding: 6px 18px;
+            border-radius: 999px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .card { transition: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 背景裝飾（只是圖案，不影響閱讀與操作） -->
+    <div class="bg" aria-hidden="true">
+        <span class="blk b1">A</span>
+        <span class="blk b2">B</span>
+        <span class="blk b3">C</span>
+        <span class="blk b4">D</span>
+        <span class="blk b5">e</span>
+
+        <!-- 鉛筆 -->
+        <svg class="doo pencil" viewBox="0 0 160 30">
+            <rect x="18" y="4" width="112" height="22" rx="3" fill="#FFD66B"/>
+            <rect x="18" y="4" width="112" height="7" fill="#F2B93B"/>
+            <rect x="18" y="4" width="5" height="22" fill="#C9CED6"/>
+            <rect x="3" y="4" width="17" height="22" rx="4" fill="#F27B6B"/>
+            <polygon points="130,4 158,15 130,26" fill="#F4D9B0"/>
+            <polygon points="148,11 158,15 148,19" fill="#2E3A4B"/>
+        </svg>
+
+        <!-- 蘋果 -->
+        <svg class="doo apple" viewBox="0 0 80 90">
+            <path d="M40 24C28 12 6 20 8 46c2 22 16 38 32 38s30-16 32-38C74 20 52 12 40 24z" fill="#F27B6B"/>
+            <ellipse cx="25" cy="42" rx="5" ry="10" fill="#fff" opacity=".35" transform="rotate(18 25 42)"/>
+            <path d="M40 24c0-8 3-14 9-19" stroke="#7A4B2A" stroke-width="5" stroke-linecap="round" fill="none"/>
+            <path d="M47 12c8-8 20-6 22 0-8 6-18 6-22 0z" fill="#62C58B"/>
+        </svg>
+
+        <!-- 書本 -->
+        <svg class="doo book" viewBox="0 0 100 80">
+            <path d="M50 14C36 6 16 8 6 14v54c10-6 30-8 44 0V14z" fill="#6DB6F0"/>
+            <path d="M50 14c14-8 34-6 44 0v54c-10-6-30-8-44 0V14z" fill="#9AD0F7"/>
+            <path d="M16 26c8-3 18-3 26 1M16 38c8-3 18-3 26 1M58 27c8-4 18-4 26-1M58 39c8-4 18-4 26-1" stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none" opacity=".8"/>
+        </svg>
+
+        <!-- 星星 -->
+        <svg class="doo star" viewBox="0 0 60 60">
+            <polygon points="30,3 38,22 58,23 42,36 48,56 30,44 12,56 18,36 2,23 22,22" fill="#FFD66B" stroke="#F2B93B" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
+        <svg class="doo star s2" viewBox="0 0 60 60">
+            <polygon points="30,3 38,22 58,23 42,36 48,56 30,44 12,56 18,36 2,23 22,22" fill="#FFD66B" stroke="#F2B93B" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
+    </div>
+
+    <div class="page">
+
+        <header class="hero">
+            <p class="kicker">Hanlin English Grade 3</p>
+            <h1>翰林115三上英文</h1>
+            <p class="lead">互動學習網：點一點、聽一聽、說一說！</p>
+        </header>
+
+        <p class="pick"><span>選一個單元開始學習吧</span></p>
+
+        <main>
+            <ul class="grid">
+                <li>
+                    <a class="card c1" href="單元一.html">
+                        <span class="num" aria-hidden="true">1</span>
+                        <span class="txt">
+                            <span class="label">Unit 1</span>
+                            <span class="name">What's Your Name?</span>
+                            <span class="zh">Ff–Jj 字母、自我介紹與打招呼</span>
+                            <span class="chips"><span>單字卡</span><span>句型對話</span><span>打招呼方式</span><span>小測驗</span></span>
+                        </span>
+                        <span class="go" aria-hidden="true">▶</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="card c2" href="單元二.html">
+                        <span class="num" aria-hidden="true">2</span>
+                        <span class="txt">
+                            <span class="label">Unit 2</span>
+                            <span class="name">How Old Are You?</span>
+                            <span class="zh">數字 6–10、問年齡與禮貌用語</span>
+                            <span class="chips"><span>單字數字</span><span>自然發音</span><span>故事劇場</span><span>羅馬數字</span><span>錄音跟讀</span><span>小測驗</span></span>
+                        </span>
+                        <span class="go" aria-hidden="true">▶</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="card c3" href="單元三.html">
+                        <span class="num" aria-hidden="true">3</span>
+                        <span class="txt">
+                            <span class="label">Unit 3</span>
+                            <span class="name">What's This?</span>
+                            <span class="zh">文具單字、這是什麼、Pp–Tt</span>
+                            <span class="chips"><span>文具單字</span><span>自然發音</span><span>故事時間</span><span>a / an</span><span>朗讀本頁</span></span>
+                        </span>
+                        <span class="go" aria-hidden="true">▶</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="card c4" href="單元四.html">
+                        <span class="num" aria-hidden="true">4</span>
+                        <span class="txt">
+                            <span class="label">Unit 4</span>
+                            <span class="name">What Color Is It?</span>
+                            <span class="zh">顏色單字、Uu–Zz、尋找黑色書包</span>
+                            <span class="chips"><span>顏色單字</span><span>自然發音</span><span>故事對話</span><span>錄音練習</span><span>小測驗</span></span>
+                        </span>
+                        <span class="go" aria-hidden="true">▶</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="card c5" href="特別單元萬聖節.html">
+                        <span class="num" aria-hidden="true">🎃</span>
+                        <span class="txt">
+                            <span class="label">Special Unit</span>
+                            <span class="name">Happy Halloween!</span>
+                            <span class="zh">字母 A–Z、萬聖節單字與小遊戲</span>
+                            <span class="chips"><span>ABC 連播</span><span>日常對話</span><span>萬聖節單字</span><span>聽音小遊戲</span></span>
+                        </span>
+                        <span class="go" aria-hidden="true">▶</span>
+                    </a>
+                </li>
+            </ul>
+        </main>
+
+        <footer>
+            <span>🔊 開始前請先打開聲音，建議使用 Chrome 或 Safari</span>
+        </footer>
+    </div>
+
+</body>
+</html>

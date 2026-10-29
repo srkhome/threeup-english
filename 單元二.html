@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 2: How Old Are You? 英語互動學習網</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Varela Round -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Varela+Round&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Varela Round', 'Inter', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            background-color: #f7f9fc;
+            color: #2d3748;
+            touch-action: manipulation;
+        }
+        .pastel-card {
+            background: #ffffff;
+            border-radius: 1.25rem;
+            box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.05), 0 2px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: all 0.2s ease;
+        }
+        .pastel-card:active {
+            transform: scale(0.97);
+        }
+        .tab-btn.active {
+            background-color: #6366f1;
+            color: white;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        button:focus-visible { outline: 3px solid #6366f1; outline-offset: 2px; }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 0.4; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+        .recording-pulse {
+            animation: pulse-ring 1.5s infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .recording-pulse { animation: none; opacity: 0.6; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col pb-20 select-none">
+
+    <!-- Sticky top area: Header + Navigation (one wrapper so the nav never overlaps the header) -->
+    <div class="sticky top-0 z-50">
+        <header class="bg-white/90 backdrop-blur-md border-b border-indigo-50 px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-600 text-xl font-bold shadow-sm">
+                    📚
+                </div>
+                <div>
+                    <h1 class="text-base font-bold text-slate-800 leading-tight">Unit 2: How Old Are You?</h1>
+                    <p class="text-xs text-slate-400 font-medium">全頁完整發音互動版</p>
+                </div>
+            </div>
+            <button onclick="speakText('Unit 2: How Old Are You?')" aria-label="朗讀單元標題" class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center hover:bg-indigo-100 active:scale-95 transition">
+                <i class="fa-solid fa-volume-high"></i>
+            </button>
+        </header>
+
+        <nav class="bg-white border-b border-slate-100 px-4 py-2 flex space-x-2 overflow-x-auto no-scrollbar shadow-sm">
+            <button onclick="switchTab('words')" class="tab-btn active px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-600 transition flex items-center space-x-1.5" data-tab="words">
+                <i class="fa-solid fa-star"></i> <span>單字與數字</span>
+            </button>
+            <button onclick="switchTab('phonics')" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-600 transition flex items-center space-x-1.5" data-tab="phonics">
+                <i class="fa-solid fa-headphones"></i> <span>自然發音</span>
+            </button>
+            <button onclick="switchTab('sentences')" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-600 transition flex items-center space-x-1.5" data-tab="sentences">
+                <i class="fa-solid fa-comments"></i> <span>句型與對話</span>
+            </button>
+            <button onclick="switchTab('story')" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-600 transition flex items-center space-x-1.5" data-tab="story">
+                <i class="fa-solid fa-book-open"></i> <span>故事劇場</span>
+            </button>
+            <button onclick="switchTab('roman')" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-600 transition flex items-center space-x-1.5" data-tab="roman">
+                <i class="fa-solid fa-hashtag"></i> <span>羅馬數字</span>
+            </button>
+            <button onclick="switchTab('practice')" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-600 transition flex items-center space-x-1.5" data-tab="practice">
+                <i class="fa-solid fa-microphone"></i> <span>錄音跟讀</span>
+            </button>
+            <button onclick="switchTab('quiz')" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-slate-100 text-slate-600 transition flex items-center space-x-1.5" data-tab="quiz">
+                <i class="fa-solid fa-gamepad"></i> <span>互動小測驗</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 max-w-md w-full mx-auto px-4 py-6">
+
+        <!-- TAB 1: Words & Numbers -->
+        <section id="tab-words" class="tab-content space-y-4">
+            <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-orange-100 p-4 rounded-2xl flex items-center space-x-3 shadow-sm">
+                <div class="text-3xl">🔢</div>
+                <div>
+                    <h2 class="font-bold text-amber-900 text-sm">Words & Numbers (單字與數字)</h2>
+                    <p class="text-xs text-amber-700">點擊任意單字卡片即可聆聽標準發音！</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3" id="words-grid"></div>
+        </section>
+
+        <!-- TAB 2: Phonics Words -->
+        <section id="tab-phonics" class="tab-content space-y-4 hidden">
+            <div class="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100 p-4 rounded-2xl flex items-center space-x-3 shadow-sm">
+                <div class="text-3xl">🔤</div>
+                <div>
+                    <h2 class="font-bold text-emerald-900 text-sm">Phonics Land (自然發音單字)</h2>
+                    <p class="text-xs text-emerald-700">包含課本所有自然發音拼讀單字！</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3" id="phonics-grid"></div>
+        </section>
+
+        <!-- TAB 3: Sentences & Daily Talk -->
+        <section id="tab-sentences" class="tab-content space-y-4 hidden">
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 p-4 rounded-2xl flex items-center space-x-3 shadow-sm">
+                <div class="text-3xl">💬</div>
+                <div>
+                    <h2 class="font-bold text-blue-900 text-sm">Sentences & Daily Talk</h2>
+                    <p class="text-xs text-blue-700">年齡句型與日常生活禮貌用語練習！點擊即可發音。</p>
+                </div>
+            </div>
+            <div class="space-y-3" id="sentences-list"></div>
+        </section>
+
+        <!-- TAB 4: Story Time -->
+        <section id="tab-story" class="tab-content space-y-4 hidden">
+            <div class="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-100 p-4 rounded-2xl flex items-center space-x-3 shadow-sm">
+                <div class="text-3xl">📖</div>
+                <div>
+                    <h2 class="font-bold text-purple-900 text-sm">Story Time (健康中心情境 1-12句)</h2>
+                    <p class="text-xs text-purple-700">完整對話逐句點擊發音與跟讀！</p>
+                </div>
+            </div>
+            <div class="space-y-3" id="story-list"></div>
+        </section>
+
+        <!-- TAB 5: Roman Numerals -->
+        <section id="tab-roman" class="tab-content space-y-4 hidden">
+            <div class="bg-gradient-to-r from-orange-50 to-yellow-50 border border-orange-100 p-4 rounded-2xl flex items-center space-x-3 shadow-sm">
+                <div class="text-3xl">🏛️</div>
+                <div>
+                    <h2 class="font-bold text-orange-900 text-sm">Roman Numerals (羅馬數字 1-10)</h2>
+                    <p class="text-xs text-orange-700">探索生活中的羅馬數字對應發音！</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3" id="roman-grid"></div>
+        </section>
+
+        <!-- TAB 6: Voice Practice -->
+        <section id="tab-practice" class="tab-content space-y-4 hidden">
+            <div class="bg-gradient-to-r from-rose-50 to-orange-50 border border-rose-100 p-4 rounded-2xl flex items-center space-x-3 shadow-sm">
+                <div class="text-3xl">🎙️</div>
+                <div>
+                    <h2 class="font-bold text-rose-900 text-sm">錄音跟讀練習</h2>
+                    <p class="text-xs text-rose-700">聽示範發音，錄下自己的聲音比對練習！</p>
+                </div>
+            </div>
+
+            <div class="pastel-card p-5 space-y-4 text-center">
+                <div id="practice-target" class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <span class="text-xs uppercase tracking-wider text-indigo-500 font-bold block mb-1">Target Sentence</span>
+                    <h3 id="practice-text" class="text-xl font-bold text-slate-800">How old are you?</h3>
+                    <p id="practice-zh" class="text-sm text-slate-500 mt-1">你幾歲？</p>
+                </div>
+
+                <div class="flex justify-center space-x-4">
+                    <button onclick="playPracticeTarget()" class="bg-indigo-50 text-indigo-600 px-4 py-2.5 rounded-xl font-semibold text-sm flex items-center space-x-2 hover:bg-indigo-100 transition shadow-sm">
+                        <i class="fa-solid fa-volume-high"></i> <span>聽示範</span>
+                    </button>
+                    <button onclick="nextPracticeItem()" class="bg-slate-100 text-slate-600 px-4 py-2.5 rounded-xl font-semibold text-sm flex items-center space-x-2 hover:bg-slate-200 transition shadow-sm">
+                        <i class="fa-solid fa-rotate-right"></i> <span>換一句</span>
+                    </button>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100 flex flex-col items-center justify-center space-y-3">
+                    <div id="recording-status" class="text-xs font-medium text-slate-400">點擊下方按鈕開始錄音</div>
+                    <div class="relative">
+                        <div id="record-ring" class="absolute -inset-2 rounded-full bg-rose-400/20 opacity-0 transition-all"></div>
+                        <button id="record-btn" onclick="toggleRecording()" aria-label="開始或停止錄音" class="w-16 h-16 rounded-full bg-rose-500 text-white text-xl flex items-center justify-center shadow-lg hover:bg-rose-600 active:scale-95 transition relative z-10">
+                            <i class="fa-solid fa-microphone" id="mic-icon"></i>
+                        </button>
+                    </div>
+                    <div id="playback-container" class="hidden w-full pt-2 flex flex-col items-center space-y-2">
+                        <span class="text-xs text-slate-500 font-semibold">你的錄音回放：</span>
+                        <audio id="audio-playback" controls class="w-full max-w-xs h-10"></audio>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 7: Quiz / Match -->
+        <section id="tab-quiz" class="tab-content space-y-4 hidden">
+            <div class="bg-gradient-to-r from-violet-50 to-purple-50 border border-violet-100 p-4 rounded-2xl flex items-center space-x-3 shadow-sm">
+                <div class="text-3xl">🎮</div>
+                <div>
+                    <h2 class="font-bold text-violet-900 text-sm">單字小測驗</h2>
+                    <p class="text-xs text-violet-700">聽聲音或看中文，選出正確的英文單字！</p>
+                </div>
+            </div>
+
+            <div class="pastel-card p-5 space-y-4 text-center" id="quiz-card">
+                <div class="flex justify-between items-center text-xs text-slate-400 font-bold">
+                    <span id="quiz-progress">Question 1 / 5</span>
+                    <span id="quiz-score">Score: 0</span>
+                </div>
+                <div class="py-6 bg-indigo-50/50 rounded-2xl border border-indigo-50 flex flex-col items-center justify-center space-y-3">
+                    <button onclick="playCurrentQuizAudio()" aria-label="播放題目發音" class="w-12 h-12 rounded-full bg-indigo-600 text-white flex items-center justify-center text-lg shadow-md hover:bg-indigo-700 transition">
+                        <i class="fa-solid fa-volume-high"></i>
+                    </button>
+                    <h3 id="quiz-prompt-zh" class="text-2xl font-bold text-slate-800">六</h3>
+                </div>
+                <div class="grid grid-cols-2 gap-3" id="quiz-options"></div>
+            </div>
+
+            <div id="quiz-complete" class="hidden pastel-card p-8 text-center space-y-4">
+                <div class="text-5xl">🏆</div>
+                <h3 class="text-xl font-bold text-slate-800">測驗完成！太棒了！</h3>
+                <p id="quiz-final-score" class="text-slate-600 font-medium"></p>
+                <button onclick="restartQuiz()" class="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold shadow-md hover:bg-indigo-700 transition">
+                    再玩一次
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-800/90 text-white px-4 py-2 rounded-xl text-xs font-medium shadow-xl opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center space-x-2">
+        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toast-msg"></span>
+    </div>
+
+    <footer class="mt-auto py-4 text-center text-xs text-slate-400 font-medium">
+        Unit 2: How Old Are You? &bull; All Content Audio Enabled
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const wordsData = [
+            { en: "six", zh: "六", icon: "6️⃣" },
+            { en: "seven", zh: "七", icon: "7️⃣" },
+            { en: "eight", zh: "八", icon: "8️⃣" },
+            { en: "nine", zh: "九", icon: "9️⃣" },
+            { en: "ten", zh: "十", icon: "🔟" },
+            { en: "how old", zh: "幾歲", icon: "❓" },
+            { en: "are", zh: "是", icon: "👉" },
+            { en: "you", zh: "你", icon: "👦" },
+            { en: "year", zh: "年；歲", icon: "📅" }
+        ];
+
+        const phonicsData = [
+            { en: "key", zh: "鑰匙", icon: "🔑" },
+            { en: "kite", zh: "風箏", icon: "🪁" },
+            { en: "lion", zh: "獅子", icon: "🦁" },
+            { en: "leg", zh: "腿", icon: "🦵" },
+            { en: "monkey", zh: "猴子", icon: "🐒" },
+            { en: "milk", zh: "牛奶", icon: "🥛" },
+            { en: "nose", zh: "鼻子", icon: "👃" },
+            { en: "neck", zh: "脖子", icon: "🦒" },
+            { en: "ox", zh: "公牛", icon: "🐂" },
+            { en: "otter", zh: "水獺", icon: "🦦" }
+        ];
+
+        const sentencesData = [
+            { en: "How old are you?", zh: "你幾歲？" },
+            { en: "I'm ten.", zh: "我十歲。" },
+            { en: "I'm ten years old.", zh: "我十歲。" },
+            { en: "Thank you.", zh: "謝謝你。" },
+            { en: "You're welcome.", zh: "不客氣。" },
+            { en: "Line up, please.", zh: "請排隊。" },
+            { en: "What's your name?", zh: "你叫什麼名字？" },
+            { en: "My name is Rocky.", zh: "我的名字是 Rocky。" },
+            { en: "I'm Abu.", zh: "我是 Abu。" },
+            { en: "Hi! How are you?", zh: "嗨！你好嗎？" },
+            { en: "I'm fine.", zh: "我很好。" }
+        ];
+
+        const storyData = [
+            { num: "1", en: "Line up, please.", zh: "請排隊。" },
+            { num: "2", en: "What's your name?", zh: "你叫什麼名字？" },
+            { num: "3", en: "My name is Rocky.", zh: "我的名字是 Rocky。" },
+            { num: "4", en: "I'm Abu.", zh: "我是 Abu。" },
+            { num: "5", en: "How old are you?", zh: "你幾歲？" },
+            { num: "6", en: "I'm nine years old.", zh: "我九歲。" },
+            { num: "7", en: "How old are you?", zh: "你幾歲？" },
+            { num: "8", en: "I'm eight.", zh: "我八歲。" },
+            { num: "9", en: "Thank you.", zh: "謝謝你。" },
+            { num: "10", en: "You're welcome.", zh: "不客氣。" },
+            { num: "11", en: "Hi! How are you?", zh: "嗨！你好嗎？" },
+            { num: "12", en: "I'm fine.", zh: "我很好。" }
+        ];
+
+        /* say：實際朗讀的內容。羅馬數字若直接念 "IV" 會被唸成字母，所以改念對應的英文數字 */
+        const romanData = [
+            { en: "I", say: "one", zh: "1 (one)", icon: "Ⅰ" },
+            { en: "II", say: "two", zh: "2 (two)", icon: "Ⅱ" },
+            { en: "III", say: "three", zh: "3 (three)", icon: "Ⅲ" },
+            { en: "IV", say: "four", zh: "4 (four)", icon: "Ⅳ" },
+            { en: "V", say: "five", zh: "5 (five)", icon: "Ⅴ" },
+            { en: "VI", say: "six", zh: "6 (six)", icon: "Ⅵ" },
+            { en: "VII", say: "seven", zh: "7 (seven)", icon: "Ⅶ" },
+            { en: "VIII", say: "eight", zh: "8 (eight)", icon: "Ⅷ" },
+            { en: "IX", say: "nine", zh: "9 (nine)", icon: "Ⅸ" },
+            { en: "X", say: "ten", zh: "10 (ten)", icon: "Ⅹ" }
+        ];
+
+        /* 錄音跟讀：合併句型與故事句子，並去除重複句 */
+        const practiceSentences = (() => {
+            const seen = new Set();
+            return [...sentencesData, ...storyData].filter(s => {
+                if (seen.has(s.en)) return false;
+                seen.add(s.en);
+                return true;
+            });
+        })();
+
+        let toastTimer = null;
+
+        function speakText(text, showMessage = true) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.85;
+                window.speechSynthesis.speak(utterance);
+                if (showMessage) showToast(`朗讀: "${text}"`);
+            } else {
+                showToast("瀏覽器不支援語音合成");
+            }
+        }
+
+        function showToast(msg, duration = 2000) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toast.classList.add('opacity-0', 'pointer-events-none'), duration);
+        }
+
+        function switchTab(tabId) {
+            if (isRecording) stopRecording();
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderGrid(containerId, data, hoverBorder) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = `pastel-card p-4 flex flex-col items-center justify-center text-center cursor-pointer ${hoverBorder} border border-transparent`;
+                card.innerHTML = `
+                    <span class="text-3xl mb-2">${item.icon}</span>
+                    <span class="text-base font-bold text-slate-800">${item.en}</span>
+                    <span class="text-xs text-slate-400 mt-0.5">${item.zh}</span>
+                `;
+                card.addEventListener('click', () => speakText(item.say || item.en));
+                container.appendChild(card);
+            });
+        }
+
+        function renderList(containerId, data, badgeBg, badgeText) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "pastel-card p-4 flex items-center justify-between cursor-pointer hover:border-indigo-200 border border-transparent space-x-3";
+
+                const numHtml = item.num ? `<div class="w-7 h-7 rounded-full ${badgeBg} ${badgeText} flex items-center justify-center font-bold text-xs shrink-0">${item.num}</div>` : '';
+
+                card.innerHTML = `
+                    ${numHtml}
+                    <div class="flex-1">
+                        <h4 class="text-base font-bold text-slate-800">${item.en}</h4>
+                        <p class="text-xs text-slate-500 mt-0.5">${item.zh}</p>
+                    </div>
+                    <div class="w-9 h-9 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-volume-high text-sm"></i>
+                    </div>
+                `;
+                card.addEventListener('click', () => speakText(item.en));
+                container.appendChild(card);
+            });
+        }
+
+        /* ---------- 錄音跟讀 ---------- */
+        let currentPracticeIndex = 0;
+        function updatePracticeDisplay() {
+            const item = practiceSentences[currentPracticeIndex];
+            document.getElementById('practice-text').innerText = item.en;
+            document.getElementById('practice-zh').innerText = item.zh;
+        }
+
+        function playPracticeTarget() {
+            speakText(practiceSentences[currentPracticeIndex].en);
+        }
+
+        function nextPracticeItem() {
+            if (isRecording) stopRecording();
+            currentPracticeIndex = (currentPracticeIndex + 1) % practiceSentences.length;
+            updatePracticeDisplay();
+            // 換句子後，清掉上一句的錄音
+            const audioPlayback = document.getElementById('audio-playback');
+            audioPlayback.pause();
+            audioPlayback.removeAttribute('src');
+            audioPlayback.load();
+            document.getElementById('playback-container').classList.add('hidden');
+            document.getElementById('recording-status').innerText = "點擊下方按鈕開始錄音";
+        }
+
+        let mediaRecorder = null;
+        let mediaStream = null;
+        let audioChunks = [];
+        let isRecording = false;
+        let lastAudioUrl = null;
+
+        function setRecordingUI(on) {
+            const recordBtn = document.getElementById('record-btn');
+            const micIcon = document.getElementById('mic-icon');
+            const recordRing = document.getElementById('record-ring');
+            micIcon.className = on ? "fa-solid fa-stop" : "fa-solid fa-microphone";
+            recordBtn.classList.toggle('bg-amber-500', on);
+            recordBtn.classList.toggle('bg-rose-500', !on);
+            recordRing.classList.toggle('opacity-0', !on);
+            recordRing.classList.toggle('recording-pulse', on);
+        }
+
+        function stopRecording() {
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+            }
+            isRecording = false;
+            setRecordingUI(false);
+        }
+
+        async function toggleRecording() {
+            if (isRecording) {
+                stopRecording();
+                return;
+            }
+
+            if (!navigator.mediaDevices || !window.MediaRecorder) {
+                showToast("此瀏覽器或環境不支援錄音（請用 https 或 localhost 開啟）", 3500);
+                return;
+            }
+
+            try {
+                window.speechSynthesis && window.speechSynthesis.cancel();
+                mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(mediaStream);
+                audioChunks = [];
+                mediaRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
+                mediaRecorder.onstop = () => {
+                    // 關閉麥克風，避免瀏覽器一直顯示錄音中
+                    mediaStream.getTracks().forEach(t => t.stop());
+                    // 使用瀏覽器實際的錄音格式（Safari 是 mp4，Chrome 是 webm）
+                    const audioBlob = new Blob(audioChunks, { type: mediaRecorder.mimeType || 'audio/webm' });
+                    if (lastAudioUrl) URL.revokeObjectURL(lastAudioUrl);
+                    lastAudioUrl = URL.createObjectURL(audioBlob);
+                    document.getElementById('audio-playback').src = lastAudioUrl;
+                    document.getElementById('playback-container').classList.remove('hidden');
+                    document.getElementById('recording-status').innerText = "錄音完成！點擊播放聆聽";
+                };
+                mediaRecorder.start();
+                isRecording = true;
+                setRecordingUI(true);
+                document.getElementById('recording-status').innerText = "正在錄音中...";
+            } catch (err) {
+                if (err && err.name === 'NotAllowedError') {
+                    showToast("請允許瀏覽器使用麥克風", 3000);
+                } else if (err && err.name === 'NotFoundError') {
+                    showToast("找不到麥克風裝置", 3000);
+                } else {
+                    showToast("無法存取麥克風", 3000);
+                }
+            }
+        }
+
+        /* ---------- 小測驗 ---------- */
+        const quizBase = [
+            { promptZh: "六", correct: "six", options: ["six", "seven", "eight", "ten"] },
+            { promptZh: "七", correct: "seven", options: ["nine", "six", "seven", "eight"] },
+            { promptZh: "八", correct: "eight", options: ["eight", "ten", "six", "nine"] },
+            { promptZh: "九", correct: "nine", options: ["seven", "ten", "nine", "six"] },
+            { promptZh: "十", correct: "ten", options: ["eight", "nine", "six", "ten"] }
+        ];
+
+        function shuffle(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        let quizPool = shuffle(quizBase);
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+        let quizLocked = false;
+
+        function loadQuiz(autoPlay = false) {
+            quizLocked = false;
+            if (currentQuizIndex >= quizPool.length) {
+                document.getElementById('quiz-card').classList.add('hidden');
+                document.getElementById('quiz-complete').classList.remove('hidden');
+                document.getElementById('quiz-final-score').innerText = `你的得分是：${quizScore} / ${quizPool.length}`;
+                return;
+            }
+            const q = quizPool[currentQuizIndex];
+            document.getElementById('quiz-progress').innerText = `Question ${currentQuizIndex + 1} / ${quizPool.length}`;
+            document.getElementById('quiz-score').innerText = `Score: ${quizScore}`;
+            document.getElementById('quiz-prompt-zh').innerText = q.promptZh;
+
+            // 只播放聲音，不顯示提示訊息（避免把答案顯示在畫面上）
+            if (autoPlay) speakText(q.correct, false);
+
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            shuffle(q.options).forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "quiz-opt py-3 px-4 rounded-xl bg-slate-50 border border-slate-200 font-bold text-slate-700 hover:bg-indigo-50 hover:border-indigo-200 active:scale-95 transition shadow-sm";
+                btn.innerText = opt;
+                btn.addEventListener('click', () => checkQuizAnswer(btn, opt, q.correct));
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function playCurrentQuizAudio() {
+            const q = quizPool[currentQuizIndex];
+            if (q) speakText(q.correct, false);
+        }
+
+        function checkQuizAnswer(btn, selected, correct) {
+            if (quizLocked) return;
+            quizLocked = true;
+
+            document.querySelectorAll('.quiz-opt').forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:bg-indigo-50', 'hover:border-indigo-200');
+                if (b.innerText === correct) {
+                    b.classList.remove('bg-slate-50', 'border-slate-200', 'text-slate-700');
+                    b.classList.add('bg-green-100', 'border-green-500', 'text-green-800');
+                }
+            });
+
+            if (selected === correct) {
+                quizScore++;
+                document.getElementById('quiz-score').innerText = `Score: ${quizScore}`;
+                showToast("答對了！ 🎉", 1200);
+            } else {
+                btn.classList.remove('bg-slate-50', 'border-slate-200', 'text-slate-700');
+                btn.classList.add('bg-red-100', 'border-red-500', 'text-red-800');
+                showToast(`正確答案是 ${correct}`, 1200);
+            }
+
+            // 讓學生看完對錯再進入下一題
+            setTimeout(() => {
+                currentQuizIndex++;
+                loadQuiz(true);
+            }, 1300);
+        }
+
+        function restartQuiz() {
+            quizPool = shuffle(quizBase);
+            currentQuizIndex = 0;
+            quizScore = 0;
+            document.getElementById('quiz-complete').classList.add('hidden');
+            document.getElementById('quiz-card').classList.remove('hidden');
+            loadQuiz(false);
+        }
+
+        window.onload = function() {
+            renderGrid('words-grid', wordsData, 'hover:border-amber-200');
+            renderGrid('phonics-grid', phonicsData, 'hover:border-emerald-200');
+            renderList('sentences-list', sentencesData, 'bg-blue-100', 'text-blue-700');
+            renderList('story-list', storyData, 'bg-purple-100', 'text-purple-700');
+            renderGrid('roman-grid', romanData, 'hover:border-orange-200');
+            updatePracticeDisplay();
+            loadQuiz(false);
+        };
+    </script>
+</body>
+</html>

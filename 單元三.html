@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 3: What's This? 語音學習網</title>
+    <!-- Tailwind CSS for modern layout styling -->
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            background-color: #FAF8F5;
+            color: #3B3330;
+        }
+        .highlight-item {
+            background-color: #FEF08A !important;
+            transform: scale(1.02);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        button:focus-visible, .item-card:focus-visible { outline: 3px solid #6366f1; outline-offset: 2px; }
+    </style>
+</head>
+<body class="bg-[#FAF8F5] text-[#3B3330] min-h-screen pb-24">
+
+    <!-- Header Section -->
+    <header class="sticky top-0 z-50 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#EAE3DA] px-4 py-3 shadow-sm">
+        <div class="max-w-md mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-bold tracking-wider px-2.5 py-1 bg-[#D47A6B]/20 text-[#D47A6B] rounded-full whitespace-nowrap">Unit 3</span>
+                <h1 class="text-xl font-bold text-[#3B3330]">What's This? 🎒</h1>
+            </div>
+            <!-- Play Current Tab All Button -->
+            <button id="playTabBtn" onclick="togglePlayTab()" class="flex items-center gap-1.5 bg-[#7CA982] hover:bg-[#6A9570] text-white px-3.5 py-2 rounded-xl font-medium shadow-sm transition active:scale-95 text-sm whitespace-nowrap">
+                <svg id="playTabIcon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                </svg>
+                <span id="playTabText">朗讀本頁</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container with Tabs -->
+    <main class="max-w-md mx-auto px-4 mt-5">
+
+        <!-- TAB 1: Vocabulary & Phonics -->
+        <div id="tab-content-1" class="tab-content space-y-6">
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-[#EAE3DA]">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-3 h-5 bg-[#7CA982] rounded-full"></div>
+                    <h2 class="text-base font-bold text-[#3B3330]">Stationery Words (文具單字)</h2>
+                </div>
+                <div class="space-y-2.5" data-group="vocab">
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F4F8F4] border border-[#E2EFE2] cursor-pointer hover:border-[#7CA982] transition" data-speak="book">
+                        <div><span class="text-lg font-bold text-[#2D5A33]">book</span> <span class="text-xs text-[#8C827D] ml-2">書</span></div>
+                        <span class="text-[#7CA982] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F4F8F4] border border-[#E2EFE2] cursor-pointer hover:border-[#7CA982] transition" data-speak="pen">
+                        <div><span class="text-lg font-bold text-[#2D5A33]">pen</span> <span class="text-xs text-[#8C827D] ml-2">原子筆</span></div>
+                        <span class="text-[#7CA982] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F4F8F4] border border-[#E2EFE2] cursor-pointer hover:border-[#7CA982] transition" data-speak="pencil">
+                        <div><span class="text-lg font-bold text-[#2D5A33]">pencil</span> <span class="text-xs text-[#8C827D] ml-2">鉛筆</span></div>
+                        <span class="text-[#7CA982] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F4F8F4] border border-[#E2EFE2] cursor-pointer hover:border-[#7CA982] transition" data-speak="eraser">
+                        <div><span class="text-lg font-bold text-[#2D5A33]">eraser</span> <span class="text-xs text-[#8C827D] ml-2">橡皮擦</span></div>
+                        <span class="text-[#7CA982] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F4F8F4] border border-[#E2EFE2] cursor-pointer hover:border-[#7CA982] transition" data-speak="ruler">
+                        <div><span class="text-lg font-bold text-[#2D5A33]">ruler</span> <span class="text-xs text-[#8C827D] ml-2">尺</span></div>
+                        <span class="text-[#7CA982] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F4F8F4] border border-[#E2EFE2] cursor-pointer hover:border-[#7CA982] transition" data-speak="marker">
+                        <div><span class="text-lg font-bold text-[#2D5A33]">marker</span> <span class="text-xs text-[#8C827D] ml-2">彩色筆、麥克筆</span></div>
+                        <span class="text-[#7CA982] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F4F8F4] border border-[#E2EFE2] cursor-pointer hover:border-[#7CA982] transition" data-speak="this">
+                        <div><span class="text-lg font-bold text-[#2D5A33]">this</span> <span class="text-xs text-[#8C827D] ml-2">這個</span></div>
+                        <span class="text-[#7CA982] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F4F8F4] border border-[#E2EFE2] cursor-pointer hover:border-[#7CA982] transition" data-speak="that">
+                        <div><span class="text-lg font-bold text-[#2D5A33]">that</span> <span class="text-xs text-[#8C827D] ml-2">那個</span></div>
+                        <span class="text-[#7CA982] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F4F8F4] border border-[#E2EFE2] cursor-pointer hover:border-[#7CA982] transition" data-speak="it">
+                        <div><span class="text-lg font-bold text-[#2D5A33]">it</span> <span class="text-xs text-[#8C827D] ml-2">它；牠</span></div>
+                        <span class="text-[#7CA982] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F4F8F4] border border-[#E2EFE2] cursor-pointer hover:border-[#7CA982] transition" data-speak="a, an">
+                        <div><span class="text-lg font-bold text-[#2D5A33]">a / an</span> <span class="text-xs text-[#8C827D] ml-2">一個（隻……等）</span></div>
+                        <span class="text-[#7CA982] text-sm">🔊</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-[#EAE3DA]">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-3 h-5 bg-[#E5C07B] rounded-full"></div>
+                    <h2 class="text-base font-bold text-[#3B3330]">Phonics Words (自然發音字彙)</h2>
+                </div>
+                <div class="space-y-2.5" data-group="vocab">
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FCF8EC] border border-[#F5EBD0] cursor-pointer hover:border-[#E5C07B] transition" data-speak="pig">
+                        <div><span class="text-lg font-bold text-[#7A5A14]">pig</span> <span class="text-xs text-[#8C827D] ml-2">豬 (Pp)</span></div>
+                        <span class="text-[#E5C07B] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FCF8EC] border border-[#F5EBD0] cursor-pointer hover:border-[#E5C07B] transition" data-speak="pink">
+                        <div><span class="text-lg font-bold text-[#7A5A14]">pink</span> <span class="text-xs text-[#8C827D] ml-2">粉紅色 (Pp)</span></div>
+                        <span class="text-[#E5C07B] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FCF8EC] border border-[#F5EBD0] cursor-pointer hover:border-[#E5C07B] transition" data-speak="queen">
+                        <div><span class="text-lg font-bold text-[#7A5A14]">queen</span> <span class="text-xs text-[#8C827D] ml-2">皇后 (Qq)</span></div>
+                        <span class="text-[#E5C07B] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FCF8EC] border border-[#F5EBD0] cursor-pointer hover:border-[#E5C07B] transition" data-speak="quiz">
+                        <div><span class="text-lg font-bold text-[#7A5A14]">quiz</span> <span class="text-xs text-[#8C827D] ml-2">小測驗 (Qq)</span></div>
+                        <span class="text-[#E5C07B] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FCF8EC] border border-[#F5EBD0] cursor-pointer hover:border-[#E5C07B] transition" data-speak="red">
+                        <div><span class="text-lg font-bold text-[#7A5A14]">red</span> <span class="text-xs text-[#8C827D] ml-2">紅色 (Rr)</span></div>
+                        <span class="text-[#E5C07B] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FCF8EC] border border-[#F5EBD0] cursor-pointer hover:border-[#E5C07B] transition" data-speak="rabbit">
+                        <div><span class="text-lg font-bold text-[#7A5A14]">rabbit</span> <span class="text-xs text-[#8C827D] ml-2">兔子 (Rr)</span></div>
+                        <span class="text-[#E5C07B] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FCF8EC] border border-[#F5EBD0] cursor-pointer hover:border-[#E5C07B] transition" data-speak="snake">
+                        <div><span class="text-lg font-bold text-[#7A5A14]">snake</span> <span class="text-xs text-[#8C827D] ml-2">蛇 (Ss)</span></div>
+                        <span class="text-[#E5C07B] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FCF8EC] border border-[#F5EBD0] cursor-pointer hover:border-[#E5C07B] transition" data-speak="sun">
+                        <div><span class="text-lg font-bold text-[#7A5A14]">sun</span> <span class="text-xs text-[#8C827D] ml-2">太陽 (Ss)</span></div>
+                        <span class="text-[#E5C07B] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FCF8EC] border border-[#F5EBD0] cursor-pointer hover:border-[#E5C07B] transition" data-speak="turtle">
+                        <div><span class="text-lg font-bold text-[#7A5A14]">turtle</span> <span class="text-xs text-[#8C827D] ml-2">烏龜 (Tt)</span></div>
+                        <span class="text-[#E5C07B] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FCF8EC] border border-[#F5EBD0] cursor-pointer hover:border-[#E5C07B] transition" data-speak="tiger">
+                        <div><span class="text-lg font-bold text-[#7A5A14]">tiger</span> <span class="text-xs text-[#8C827D] ml-2">老虎 (Tt)</span></div>
+                        <span class="text-[#E5C07B] text-sm">🔊</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: Sentences & Daily Talk -->
+        <div id="tab-content-2" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-[#EAE3DA]">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-3 h-5 bg-[#D47A6B] rounded-full"></div>
+                    <h2 class="text-base font-bold text-[#3B3330]">Core Sentences (核心句型)</h2>
+                </div>
+                <div class="space-y-2.5" data-group="sentences">
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FAF1EF] border border-[#F4E0DD] cursor-pointer hover:border-[#D47A6B] transition" data-speak="What's that? It's a book.">
+                        <div>
+                            <div class="text-base font-bold text-[#7E3529]">What's that? It's a book.</div>
+                            <div class="text-xs text-[#8C827D]">那是什麼？它是一本書。</div>
+                        </div>
+                        <span class="text-[#D47A6B] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FAF1EF] border border-[#F4E0DD] cursor-pointer hover:border-[#D47A6B] transition" data-speak="What's this? It's an eraser.">
+                        <div>
+                            <div class="text-base font-bold text-[#7E3529]">What's this? It's an eraser.</div>
+                            <div class="text-xs text-[#8C827D]">這是什麼？它是一塊橡皮擦。</div>
+                        </div>
+                        <span class="text-[#D47A6B] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FAF1EF] border border-[#F4E0DD] cursor-pointer hover:border-[#D47A6B] transition" data-speak="What's this? It's a marker.">
+                        <div>
+                            <div class="text-base font-bold text-[#7E3529]">What's this? It's a marker.</div>
+                            <div class="text-xs text-[#8C827D]">這是什麼？它是一枝彩色筆。</div>
+                        </div>
+                        <span class="text-[#D47A6B] text-sm">🔊</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-[#EAE3DA]">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-3 h-5 bg-[#A391C4] rounded-full"></div>
+                    <h2 class="text-base font-bold text-[#3B3330]">Daily Talk (日常對話)</h2>
+                </div>
+                <div class="space-y-2.5" data-group="sentences">
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F5F3F9] border border-[#E7E2F1] cursor-pointer hover:border-[#A391C4] transition" data-speak="Good job!">
+                        <div>
+                            <div class="text-base font-bold text-[#56417A]">Good job!</div>
+                            <div class="text-xs text-[#8C827D]">做得好！</div>
+                        </div>
+                        <span class="text-[#A391C4] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F5F3F9] border border-[#E7E2F1] cursor-pointer hover:border-[#A391C4] transition" data-speak="Thanks!">
+                        <div>
+                            <div class="text-base font-bold text-[#56417A]">Thanks!</div>
+                            <div class="text-xs text-[#8C827D]">謝謝！</div>
+                        </div>
+                        <span class="text-[#A391C4] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F5F3F9] border border-[#E7E2F1] cursor-pointer hover:border-[#A391C4] transition" data-speak="Cool!">
+                        <div>
+                            <div class="text-base font-bold text-[#56417A]">Cool!</div>
+                            <div class="text-xs text-[#8C827D]">酷！</div>
+                        </div>
+                        <span class="text-[#A391C4] text-sm">🔊</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: Story Time -->
+        <div id="tab-content-3" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-[#EAE3DA]">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-3 h-5 bg-[#D47A6B] rounded-full"></div>
+                    <h2 class="text-base font-bold text-[#3B3330]">Story Time Dialogue (故事時間)</h2>
+                </div>
+                <div class="space-y-2.5" data-group="story">
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FAF1EF] border border-[#F4E0DD] cursor-pointer hover:border-[#D47A6B] transition" data-speak="Hello, Mia! How are you?">
+                        <div>
+                            <div class="text-sm font-bold text-[#7E3529]">1. Hello, Mia! How are you?</div>
+                            <div class="text-xs text-[#8C827D]">哈囉，Mia！你好嗎？</div>
+                        </div>
+                        <span class="text-[#D47A6B] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FAF1EF] border border-[#F4E0DD] cursor-pointer hover:border-[#D47A6B] transition" data-speak="Hi, Amber! I'm fine.">
+                        <div>
+                            <div class="text-sm font-bold text-[#7E3529]">2. Hi, Amber! I'm fine.</div>
+                            <div class="text-xs text-[#8C827D]">嗨，Amber！我很好。</div>
+                        </div>
+                        <span class="text-[#D47A6B] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FAF1EF] border border-[#F4E0DD] cursor-pointer hover:border-[#D47A6B] transition" data-speak="Wow! Cool!">
+                        <div>
+                            <div class="text-sm font-bold text-[#7E3529]">3. Wow! Cool!</div>
+                            <div class="text-xs text-[#8C827D]">哇！酷！</div>
+                        </div>
+                        <span class="text-[#D47A6B] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FAF1EF] border border-[#F4E0DD] cursor-pointer hover:border-[#D47A6B] transition" data-speak="Hey! Stop! How old are you?">
+                        <div>
+                            <div class="text-sm font-bold text-[#7E3529]">4. Hey! Stop! How old are you?</div>
+                            <div class="text-xs text-[#8C827D]">嘿！停下來！你幾歲？</div>
+                        </div>
+                        <span class="text-[#D47A6B] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FAF1EF] border border-[#F4E0DD] cursor-pointer hover:border-[#D47A6B] transition" data-speak="I'm... um...">
+                        <div>
+                            <div class="text-sm font-bold text-[#7E3529]">5. I'm ... um ...</div>
+                            <div class="text-xs text-[#8C827D]">我……呃……</div>
+                        </div>
+                        <span class="text-[#D47A6B] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FAF1EF] border border-[#F4E0DD] cursor-pointer hover:border-[#D47A6B] transition" data-speak="Thank you.">
+                        <div>
+                            <div class="text-sm font-bold text-[#7E3529]">6. Thank you.</div>
+                            <div class="text-xs text-[#8C827D]">謝謝你們。</div>
+                        </div>
+                        <span class="text-[#D47A6B] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FAF1EF] border border-[#F4E0DD] cursor-pointer hover:border-[#D47A6B] transition" data-speak="You're welcome.">
+                        <div>
+                            <div class="text-sm font-bold text-[#7E3529]">7. You're welcome.</div>
+                            <div class="text-xs text-[#8C827D]">不客氣。</div>
+                        </div>
+                        <span class="text-[#D47A6B] text-sm">🔊</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: Grammar & Parts of a Book -->
+        <div id="tab-content-4" class="tab-content hidden space-y-6">
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-[#EAE3DA]">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-3 h-5 bg-[#5B82A6] rounded-full"></div>
+                    <h2 class="text-base font-bold text-[#3B3330]">Kung Fu Abu: a 還是 an ?</h2>
+                </div>
+                <div class="p-3.5 bg-[#F0F5FA] rounded-xl border border-[#D5E3F0] text-sm text-[#2C4A66] space-y-2">
+                    <p class="font-bold">💡 文法小祕訣：</p>
+                    <p><strong>a</strong> 和 <strong>an</strong> 都是「一個」。</p>
+                    <p>母音發音（<strong>a, e, i, o, u</strong>）開頭要用 <strong>an</strong>，其他都用 <strong>a</strong>。</p>
+                    <div class="pt-2 border-t border-[#D5E3F0] space-y-1">
+                        <p class="text-xs text-[#557290]">👉 <strong>a book, a pen, a pencil, a ruler, a marker</strong></p>
+                        <p class="text-xs text-[#557290]">👉 <strong>an eraser, an apple, an insect</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-4 shadow-sm border border-[#EAE3DA]">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-3 h-5 bg-[#7CA982] rounded-full"></div>
+                    <h2 class="text-base font-bold text-[#3B3330]">Parts of a Book (書籍資訊)</h2>
+                </div>
+                <div class="space-y-2.5" data-group="grammar">
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F4F8F4] border border-[#E2EFE2] cursor-pointer hover:border-[#7CA982] transition" data-speak="title">
+                        <div><span class="text-base font-bold text-[#2D5A33]">title</span> <span class="text-xs text-[#8C827D] ml-2">書名</span></div>
+                        <span class="text-[#7CA982] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F4F8F4] border border-[#E2EFE2] cursor-pointer hover:border-[#7CA982] transition" data-speak="author">
+                        <div><span class="text-base font-bold text-[#2D5A33]">author</span> <span class="text-xs text-[#8C827D] ml-2">作者</span></div>
+                        <span class="text-[#7CA982] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F4F8F4] border border-[#E2EFE2] cursor-pointer hover:border-[#7CA982] transition" data-speak="illustrator">
+                        <div><span class="text-base font-bold text-[#2D5A33]">illustrator</span> <span class="text-xs text-[#8C827D] ml-2">繪者</span></div>
+                        <span class="text-[#7CA982] text-sm">🔊</span>
+                    </div>
+                    <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F4F8F4] border border-[#E2EFE2] cursor-pointer hover:border-[#7CA982] transition" data-speak="I S B N">
+                        <div><span class="text-base font-bold text-[#2D5A33]">ISBN</span> <span class="text-xs text-[#8C827D] ml-2">國際標準書碼</span></div>
+                        <span class="text-[#7CA982] text-sm">🔊</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav aria-label="分頁導航" class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-[#EAE3DA] py-2 px-2 shadow-lg z-50">
+        <div class="max-w-md mx-auto grid grid-cols-4 gap-1 text-center">
+            <button onclick="switchTab(1)" id="tab-btn-1" class="tab-btn flex flex-col items-center justify-center py-1.5 px-1 rounded-xl text-[#7CA982] bg-[#F4F8F4] font-bold transition">
+                <span class="text-lg">📖</span>
+                <span class="text-[11px] mt-0.5">單字與發音</span>
+            </button>
+            <button onclick="switchTab(2)" id="tab-btn-2" class="tab-btn flex flex-col items-center justify-center py-1.5 px-1 rounded-xl text-[#8C827D] hover:text-[#3B3330] transition">
+                <span class="text-lg">💬</span>
+                <span class="text-[11px] mt-0.5">句型對話</span>
+            </button>
+            <button onclick="switchTab(3)" id="tab-btn-3" class="tab-btn flex flex-col items-center justify-center py-1.5 px-1 rounded-xl text-[#8C827D] hover:text-[#3B3330] transition">
+                <span class="text-lg">⭐</span>
+                <span class="text-[11px] mt-0.5">故事時間</span>
+            </button>
+            <button onclick="switchTab(4)" id="tab-btn-4" class="tab-btn flex flex-col items-center justify-center py-1.5 px-1 rounded-xl text-[#8C827D] hover:text-[#3B3330] transition">
+                <span class="text-lg">📚</span>
+                <span class="text-[11px] mt-0.5">文法書籍</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- JavaScript Speech & Pagination Logic -->
+    <script>
+        const synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
+        let currentTab = 1;
+        let isPlayingTab = false;
+        let tabQueue = [];
+        let queueIndex = 0;
+        // 每次朗讀都會換一個編號；舊的朗讀事件（被取消時才觸發）只要編號不符就直接忽略，
+        // 這樣點擊單張卡片或停止時，不會誤觸發「跳到下一張」。
+        let speakToken = 0;
+
+        function clearHighlights() {
+            document.querySelectorAll('.item-card').forEach(card => card.classList.remove('highlight-item'));
+        }
+
+        function stopAllSpeech() {
+            speakToken++;
+            if (synth) synth.cancel();
+            isPlayingTab = false;
+            clearHighlights();
+            updatePlayTabButtonState();
+        }
+
+        function switchTab(tabNum) {
+            stopAllSpeech();
+            currentTab = tabNum;
+
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-content-${tabNum}`).classList.remove('hidden');
+
+            document.querySelectorAll('.tab-btn').forEach((btn, index) => {
+                const active = (index + 1) === tabNum;
+                btn.className = active
+                    ? "tab-btn flex flex-col items-center justify-center py-1.5 px-1 rounded-xl text-[#7CA982] bg-[#F4F8F4] font-bold transition"
+                    : "tab-btn flex flex-col items-center justify-center py-1.5 px-1 rounded-xl text-[#8C827D] hover:text-[#3B3330] transition";
+                if (active) btn.setAttribute('aria-current', 'page');
+                else btn.removeAttribute('aria-current');
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* 朗讀一張卡片。朗讀的文字取自 data-speak，點單張與「朗讀本頁」使用同一份內容 */
+        function speakCard(card, queued) {
+            if (!synth) {
+                alert("您的瀏覽器不支援語音朗讀功能");
+                return;
+            }
+
+            const token = ++speakToken;
+            synth.cancel();
+            clearHighlights();
+
+            card.classList.add('highlight-item');
+            if (queued) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            const utterance = new SpeechSynthesisUtterance(card.dataset.speak);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.9;
+
+            const finish = () => {
+                if (token !== speakToken) return; // 已被新的朗讀或停止取代
+                card.classList.remove('highlight-item');
+                if (queued && isPlayingTab) {
+                    queueIndex++;
+                    playNextInTabQueue();
+                }
+            };
+            utterance.onend = finish;
+            utterance.onerror = finish;
+
+            synth.speak(utterance);
+        }
+
+        function togglePlayTab() {
+            if (isPlayingTab) {
+                stopAllSpeech();
+                return;
+            }
+
+            const activeTabContainer = document.getElementById(`tab-content-${currentTab}`);
+            const cards = Array.from(activeTabContainer.querySelectorAll('.item-card'));
+            if (cards.length === 0) return;
+
+            tabQueue = cards;
+            queueIndex = 0;
+            isPlayingTab = true;
+            updatePlayTabButtonState();
+            playNextInTabQueue();
+        }
+
+        function playNextInTabQueue() {
+            if (!isPlayingTab) return;
+
+            if (queueIndex >= tabQueue.length) {
+                isPlayingTab = false;
+                updatePlayTabButtonState();
+                clearHighlights();
+                return;
+            }
+            speakCard(tabQueue[queueIndex], true);
+        }
+
+        function updatePlayTabButtonState() {
+            const textEl = document.getElementById('playTabText');
+            const iconEl = document.getElementById('playTabIcon');
+            if (isPlayingTab) {
+                textEl.innerText = "停止播放";
+                iconEl.innerHTML = '<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clip-rule="evenodd" />';
+            } else {
+                textEl.innerText = "朗讀本頁";
+                iconEl.innerHTML = '<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />';
+            }
+        }
+
+        // 點擊卡片：若正在「朗讀本頁」，就改成只念這一張
+        document.addEventListener('click', e => {
+            const card = e.target.closest('.item-card');
+            if (!card) return;
+            if (isPlayingTab) {
+                isPlayingTab = false;
+                updatePlayTabButtonState();
+            }
+            speakCard(card, false);
+        });
+
+        // 讓卡片也能用鍵盤操作（Tab 鍵移動、Enter 或空白鍵朗讀）
+        document.querySelectorAll('.item-card').forEach(card => {
+            card.setAttribute('role', 'button');
+            card.setAttribute('tabindex', '0');
+            card.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    card.click();
+                }
+            });
+        });
+
+        document.getElementById('tab-btn-1').setAttribute('aria-current', 'page');
+    </script>
+</body>
+</html>
