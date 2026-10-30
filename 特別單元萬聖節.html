@@ -57,12 +57,13 @@
         button:focus-visible, [data-speak]:focus-visible { outline: 3px solid #6366f1; outline-offset: 2px; }
     </style>
 </head>
-<body class="flex flex-col min-h-screen pb-20">
+<body class="flex flex-col min-h-screen pb-6">
 
     <!-- 頂部導航 Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50 px-4 py-3 flex items-center justify-between border-b border-gray-100">
+    <div class="sticky top-0 z-50">
+    <header class="bg-white px-4 py-3 flex items-center justify-between border-b border-gray-100">
         <div class="flex items-center space-x-2">
-            <span class="text-3xl">🌟</span>
+            <a href="index.html" aria-label="回首頁" class="w-11 h-11 shrink-0 rounded-full bg-pastelYellow text-2xl flex items-center justify-center shadow-sm hover:bg-amber-100 transition">🏠</a>
             <h1 class="text-xl font-bold text-gray-700 tracking-wide">English Kids Fun</h1>
         </div>
         <div class="flex items-center space-x-3 bg-pastelYellow px-3 py-1.5 rounded-full shadow-inner">
@@ -70,9 +71,33 @@
             <span id="star-count" class="font-bold text-amber-700 text-lg">0</span>
         </div>
     </header>
+    <!-- 頂部分頁選單 Top Tab Navigation -->
+    <nav aria-label="分頁導航" class="bg-white border-b border-gray-200 shadow-sm py-1.5 px-4 flex justify-around md:justify-center md:gap-10 items-center">
+        <button onclick="switchTab('home')" id="nav-home" aria-current="page" class="flex flex-col items-center text-pink-500 transition">
+            <i class="fa-solid fa-house text-xl mb-1"></i>
+            <span class="text-[10px] font-bold">首頁</span>
+        </button>
+        <button onclick="switchTab('abc')" id="nav-abc" class="flex flex-col items-center text-gray-400 transition">
+            <i class="fa-solid fa-font text-xl mb-1"></i>
+            <span class="text-[10px] font-bold">ABC</span>
+        </button>
+        <button onclick="switchTab('talk')" id="nav-talk" class="flex flex-col items-center text-gray-400 transition">
+            <i class="fa-solid fa-comments text-xl mb-1"></i>
+            <span class="text-[10px] font-bold">對話</span>
+        </button>
+        <button onclick="switchTab('festival')" id="nav-festival" class="flex flex-col items-center text-gray-400 transition">
+            <i class="fa-solid fa-hat-wizard text-xl mb-1"></i>
+            <span class="text-[10px] font-bold">節慶</span>
+        </button>
+        <button onclick="switchTab('game')" id="nav-game" class="flex flex-col items-center text-gray-400 transition">
+            <i class="fa-solid fa-gamepad text-xl mb-1"></i>
+            <span class="text-[10px] font-bold">小遊戲</span>
+        </button>
+    </nav>
+    </div>
 
     <!-- 主要內容區塊 -->
-    <main class="flex-1 max-w-md w-full mx-auto p-4 mb-16" id="main-container">
+    <main class="flex-1 max-w-md md:max-w-3xl lg:max-w-5xl w-full mx-auto p-4 md:p-6 mb-6" id="main-container">
 
         <!-- 首頁 / 歡迎儀表板 -->
         <section id="tab-home" class="space-y-6">
@@ -85,7 +110,7 @@
                 </button>
             </div>
 
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 <div onclick="switchTab('abc')" role="button" tabindex="0" class="bg-pastelBlue bg-opacity-40 p-5 rounded-2xl shadow-sm cursor-pointer bouncy-card border-2 border-emerald-100 text-center flex flex-col items-center justify-center">
                     <span class="text-4xl mb-2">🔤</span>
                     <h3 class="font-bold text-gray-700 text-lg">Unit 1: ABC Time</h3>
@@ -122,7 +147,7 @@
             </div>
 
             <!-- ABC 網格列表 -->
-            <div id="abc-grid" class="grid grid-cols-2 gap-3">
+            <div id="abc-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                 <!-- JS 動態生成 -->
             </div>
         </section>
@@ -134,7 +159,7 @@
                 <p class="text-xs text-gray-500">學習課本核心句型：「What's this?」、「What's your name?」、「How old are you?」</p>
             </div>
 
-            <div id="talk-list" class="space-y-3">
+            <div id="talk-list" class="space-y-3 md:space-y-0 md:grid md:grid-cols-2 md:gap-3">
                 <!-- JS 動態生成對話場景 -->
             </div>
         </section>
@@ -148,21 +173,21 @@
 
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-purple-100">
                 <h3 class="font-bold text-gray-700 mb-3 text-sm flex items-center"><span class="mr-2">👻</span> 萬聖節主題單字</h3>
-                <div id="festival-words" class="grid grid-cols-2 gap-3">
+                <div id="festival-words" class="grid grid-cols-2 md:grid-cols-3 gap-3">
                     <!-- JS 生成 -->
                 </div>
             </div>
 
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-purple-100">
                 <h3 class="font-bold text-gray-700 mb-3 text-sm flex items-center"><span class="mr-2">🦇</span> 萬聖節趣味情境對話</h3>
-                <div id="festival-talks" class="space-y-3">
+                <div id="festival-talks" class="space-y-3 md:space-y-0 md:grid md:grid-cols-2 md:gap-3">
                     <!-- JS 生成 -->
                 </div>
             </div>
         </section>
 
         <!-- Unit 4: Game & Quiz -->
-        <section id="tab-game" class="hidden space-y-4">
+        <section id="tab-game" class="hidden space-y-4 md:max-w-xl md:mx-auto">
             <div class="bg-pastelYellow bg-opacity-50 p-4 rounded-2xl">
                 <h2 class="text-xl font-bold text-gray-800">🎮 聽音選圖大挑戰</h2>
                 <p class="text-xs text-gray-500">聆聽語音提示，選出正確的圖片或單字，賺取星星獎勵！</p>
@@ -186,32 +211,9 @@
 
     </main>
 
-    <!-- 底部導航欄 Bottom Navigation -->
-    <nav aria-label="分頁導航" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg py-2 px-4 flex justify-around items-center z-50 max-w-md mx-auto">
-        <button onclick="switchTab('home')" id="nav-home" aria-current="page" class="flex flex-col items-center text-pink-500 transition">
-            <i class="fa-solid fa-house text-xl mb-1"></i>
-            <span class="text-[10px] font-bold">首頁</span>
-        </button>
-        <button onclick="switchTab('abc')" id="nav-abc" class="flex flex-col items-center text-gray-400 transition">
-            <i class="fa-solid fa-font text-xl mb-1"></i>
-            <span class="text-[10px] font-bold">ABC</span>
-        </button>
-        <button onclick="switchTab('talk')" id="nav-talk" class="flex flex-col items-center text-gray-400 transition">
-            <i class="fa-solid fa-comments text-xl mb-1"></i>
-            <span class="text-[10px] font-bold">對話</span>
-        </button>
-        <button onclick="switchTab('festival')" id="nav-festival" class="flex flex-col items-center text-gray-400 transition">
-            <i class="fa-solid fa-hat-wizard text-xl mb-1"></i>
-            <span class="text-[10px] font-bold">節慶</span>
-        </button>
-        <button onclick="switchTab('game')" id="nav-game" class="flex flex-col items-center text-gray-400 transition">
-            <i class="fa-solid fa-gamepad text-xl mb-1"></i>
-            <span class="text-[10px] font-bold">小遊戲</span>
-        </button>
-    </nav>
 
     <!-- 提示音框 / Toast 訊息 -->
-    <div id="toast" role="status" aria-live="polite" class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-full text-xs opacity-0 transition-opacity pointer-events-none z-50 shadow-md">
+    <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-full text-xs opacity-0 transition-opacity pointer-events-none z-50 shadow-md">
         提示訊息
     </div>
 

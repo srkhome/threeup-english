@@ -22,14 +22,15 @@
         button:focus-visible, .item-card:focus-visible { outline: 3px solid #6366f1; outline-offset: 2px; }
     </style>
 </head>
-<body class="bg-[#FAF8F5] text-[#3B3330] min-h-screen pb-24">
+<body class="bg-[#FAF8F5] text-[#3B3330] min-h-screen pb-10">
 
     <!-- Header Section -->
-    <header class="sticky top-0 z-50 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#EAE3DA] px-4 py-3 shadow-sm">
-        <div class="max-w-md mx-auto flex items-center justify-between">
+    <div class="sticky top-0 z-50">
+    <header class="bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#EAE3DA] px-4 py-3">
+        <div class="max-w-md md:max-w-3xl mx-auto flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center gap-2">
-                <span class="text-xs font-bold tracking-wider px-2.5 py-1 bg-[#D47A6B]/20 text-[#D47A6B] rounded-full whitespace-nowrap">Unit 3</span>
-                <h1 class="text-xl font-bold text-[#3B3330]">What's This? 🎒</h1>
+                <a href="index.html" aria-label="回首頁" class="text-xs font-bold tracking-wider px-2.5 py-1 bg-[#D47A6B]/20 text-[#D47A6B] rounded-full whitespace-nowrap hover:bg-[#D47A6B]/30 transition">🏠 Unit 3</a>
+                <h1 class="text-lg sm:text-xl font-bold text-[#3B3330]">What's This? 🎒</h1>
             </div>
             <!-- Play Current Tab All Button -->
             <button id="playTabBtn" onclick="togglePlayTab()" class="flex items-center gap-1.5 bg-[#7CA982] hover:bg-[#6A9570] text-white px-3.5 py-2 rounded-xl font-medium shadow-sm transition active:scale-95 text-sm whitespace-nowrap">
@@ -40,9 +41,31 @@
             </button>
         </div>
     </header>
+    <!-- 頂部分頁選單 Top Tab Navigation -->
+    <nav aria-label="分頁導航" class="bg-white/95 backdrop-blur-md border-b border-[#EAE3DA] py-1.5 px-2 shadow-sm">
+        <div class="max-w-md md:max-w-3xl mx-auto grid grid-cols-4 gap-1 text-center">
+            <button onclick="switchTab(1)" id="tab-btn-1" class="tab-btn flex flex-col items-center justify-center py-1.5 px-1 rounded-xl text-[#7CA982] bg-[#F4F8F4] font-bold transition">
+                <span class="text-lg">📖</span>
+                <span class="text-[11px] mt-0.5">單字與發音</span>
+            </button>
+            <button onclick="switchTab(2)" id="tab-btn-2" class="tab-btn flex flex-col items-center justify-center py-1.5 px-1 rounded-xl text-[#8C827D] hover:text-[#3B3330] transition">
+                <span class="text-lg">💬</span>
+                <span class="text-[11px] mt-0.5">句型對話</span>
+            </button>
+            <button onclick="switchTab(3)" id="tab-btn-3" class="tab-btn flex flex-col items-center justify-center py-1.5 px-1 rounded-xl text-[#8C827D] hover:text-[#3B3330] transition">
+                <span class="text-lg">⭐</span>
+                <span class="text-[11px] mt-0.5">故事時間</span>
+            </button>
+            <button onclick="switchTab(4)" id="tab-btn-4" class="tab-btn flex flex-col items-center justify-center py-1.5 px-1 rounded-xl text-[#8C827D] hover:text-[#3B3330] transition">
+                <span class="text-lg">📚</span>
+                <span class="text-[11px] mt-0.5">文法書籍</span>
+            </button>
+        </div>
+    </nav>
+    </div>
 
     <!-- Main Content Container with Tabs -->
-    <main class="max-w-md mx-auto px-4 mt-5">
+    <main class="max-w-md md:max-w-3xl mx-auto px-4 mt-5">
 
         <!-- TAB 1: Vocabulary & Phonics -->
         <div id="tab-content-1" class="tab-content space-y-6">
@@ -51,7 +74,7 @@
                     <div class="w-3 h-5 bg-[#7CA982] rounded-full"></div>
                     <h2 class="text-base font-bold text-[#3B3330]">Stationery Words (文具單字)</h2>
                 </div>
-                <div class="space-y-2.5" data-group="vocab">
+                <div class="space-y-2.5 md:space-y-0 md:grid md:grid-cols-2 md:gap-2.5" data-group="vocab">
                     <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F4F8F4] border border-[#E2EFE2] cursor-pointer hover:border-[#7CA982] transition" data-speak="book">
                         <div><span class="text-lg font-bold text-[#2D5A33]">book</span> <span class="text-xs text-[#8C827D] ml-2">書</span></div>
                         <span class="text-[#7CA982] text-sm">🔊</span>
@@ -100,7 +123,7 @@
                     <div class="w-3 h-5 bg-[#E5C07B] rounded-full"></div>
                     <h2 class="text-base font-bold text-[#3B3330]">Phonics Words (自然發音字彙)</h2>
                 </div>
-                <div class="space-y-2.5" data-group="vocab">
+                <div class="space-y-2.5 md:space-y-0 md:grid md:grid-cols-2 md:gap-2.5" data-group="vocab">
                     <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FCF8EC] border border-[#F5EBD0] cursor-pointer hover:border-[#E5C07B] transition" data-speak="pig">
                         <div><span class="text-lg font-bold text-[#7A5A14]">pig</span> <span class="text-xs text-[#8C827D] ml-2">豬 (Pp)</span></div>
                         <span class="text-[#E5C07B] text-sm">🔊</span>
@@ -152,7 +175,7 @@
                     <div class="w-3 h-5 bg-[#D47A6B] rounded-full"></div>
                     <h2 class="text-base font-bold text-[#3B3330]">Core Sentences (核心句型)</h2>
                 </div>
-                <div class="space-y-2.5" data-group="sentences">
+                <div class="space-y-2.5 md:space-y-0 md:grid md:grid-cols-2 md:gap-2.5" data-group="sentences">
                     <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FAF1EF] border border-[#F4E0DD] cursor-pointer hover:border-[#D47A6B] transition" data-speak="What's that? It's a book.">
                         <div>
                             <div class="text-base font-bold text-[#7E3529]">What's that? It's a book.</div>
@@ -182,7 +205,7 @@
                     <div class="w-3 h-5 bg-[#A391C4] rounded-full"></div>
                     <h2 class="text-base font-bold text-[#3B3330]">Daily Talk (日常對話)</h2>
                 </div>
-                <div class="space-y-2.5" data-group="sentences">
+                <div class="space-y-2.5 md:space-y-0 md:grid md:grid-cols-2 md:gap-2.5" data-group="sentences">
                     <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F5F3F9] border border-[#E7E2F1] cursor-pointer hover:border-[#A391C4] transition" data-speak="Good job!">
                         <div>
                             <div class="text-base font-bold text-[#56417A]">Good job!</div>
@@ -215,7 +238,7 @@
                     <div class="w-3 h-5 bg-[#D47A6B] rounded-full"></div>
                     <h2 class="text-base font-bold text-[#3B3330]">Story Time Dialogue (故事時間)</h2>
                 </div>
-                <div class="space-y-2.5" data-group="story">
+                <div class="space-y-2.5 md:space-y-0 md:grid md:grid-cols-2 md:gap-2.5" data-group="story">
                     <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#FAF1EF] border border-[#F4E0DD] cursor-pointer hover:border-[#D47A6B] transition" data-speak="Hello, Mia! How are you?">
                         <div>
                             <div class="text-sm font-bold text-[#7E3529]">1. Hello, Mia! How are you?</div>
@@ -292,7 +315,7 @@
                     <div class="w-3 h-5 bg-[#7CA982] rounded-full"></div>
                     <h2 class="text-base font-bold text-[#3B3330]">Parts of a Book (書籍資訊)</h2>
                 </div>
-                <div class="space-y-2.5" data-group="grammar">
+                <div class="space-y-2.5 md:space-y-0 md:grid md:grid-cols-2 md:gap-2.5" data-group="grammar">
                     <div class="item-card flex items-center justify-between p-3 rounded-xl bg-[#F4F8F4] border border-[#E2EFE2] cursor-pointer hover:border-[#7CA982] transition" data-speak="title">
                         <div><span class="text-base font-bold text-[#2D5A33]">title</span> <span class="text-xs text-[#8C827D] ml-2">書名</span></div>
                         <span class="text-[#7CA982] text-sm">🔊</span>
@@ -315,27 +338,6 @@
 
     </main>
 
-    <!-- Bottom Navigation Bar -->
-    <nav aria-label="分頁導航" class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-[#EAE3DA] py-2 px-2 shadow-lg z-50">
-        <div class="max-w-md mx-auto grid grid-cols-4 gap-1 text-center">
-            <button onclick="switchTab(1)" id="tab-btn-1" class="tab-btn flex flex-col items-center justify-center py-1.5 px-1 rounded-xl text-[#7CA982] bg-[#F4F8F4] font-bold transition">
-                <span class="text-lg">📖</span>
-                <span class="text-[11px] mt-0.5">單字與發音</span>
-            </button>
-            <button onclick="switchTab(2)" id="tab-btn-2" class="tab-btn flex flex-col items-center justify-center py-1.5 px-1 rounded-xl text-[#8C827D] hover:text-[#3B3330] transition">
-                <span class="text-lg">💬</span>
-                <span class="text-[11px] mt-0.5">句型對話</span>
-            </button>
-            <button onclick="switchTab(3)" id="tab-btn-3" class="tab-btn flex flex-col items-center justify-center py-1.5 px-1 rounded-xl text-[#8C827D] hover:text-[#3B3330] transition">
-                <span class="text-lg">⭐</span>
-                <span class="text-[11px] mt-0.5">故事時間</span>
-            </button>
-            <button onclick="switchTab(4)" id="tab-btn-4" class="tab-btn flex flex-col items-center justify-center py-1.5 px-1 rounded-xl text-[#8C827D] hover:text-[#3B3330] transition">
-                <span class="text-lg">📚</span>
-                <span class="text-[11px] mt-0.5">文法書籍</span>
-            </button>
-        </div>
-    </nav>
 
     <!-- JavaScript Speech & Pagination Logic -->
     <script>

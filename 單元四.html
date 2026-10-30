@@ -60,12 +60,13 @@
         button:focus-visible, [data-speak]:focus-visible { outline: 3px solid #6366f1; outline-offset: 2px; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between max-w-md mx-auto relative shadow-2xl overflow-x-hidden border-x border-stone-200">
+<body class="min-h-screen flex flex-col justify-between max-w-md md:max-w-3xl lg:max-w-5xl mx-auto relative shadow-2xl overflow-x-hidden border-x border-stone-200">
 
     <!-- Top Header -->
-    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 px-5 py-4 border-b border-stone-100 flex items-center justify-between">
+    <div class="sticky top-0 z-50">
+    <header class="bg-white/90 backdrop-blur-md px-5 py-3 border-b border-stone-100 flex items-center justify-between">
         <div class="flex items-center space-x-2">
-            <span class="text-2xl">🌱</span>
+            <a href="index.html" aria-label="回首頁" class="w-10 h-10 shrink-0 rounded-full bg-amber-100 text-xl flex items-center justify-center hover:bg-amber-200 transition">🏠</a>
             <div>
                 <h1 class="font-extrabold text-xs text-stone-700 tracking-tight">Unit 4: What Color Is It?</h1>
                 <p class="text-[11px] text-stone-400 font-medium">小學英語互動語音學習網</p>
@@ -77,9 +78,33 @@
             <span id="score-display">0 pts</span>
         </div>
     </header>
+    <!-- 頂部分頁選單 Top Tab Navigation -->
+    <nav aria-label="分頁導航" class="bg-white/95 backdrop-blur-md border-b border-stone-100 px-1 py-1.5 flex justify-around items-center shadow-sm">
+        <button onclick="switchTab('tab-words-phonics', this)" aria-current="page" class="nav-btn flex flex-col items-center text-blue-600 transition flex-1 py-1">
+            <span class="text-base">🎨</span>
+            <span class="text-[11px] font-extrabold mt-0.5">單字與發音</span>
+        </button>
+        <button onclick="switchTab('tab-dailytalk-sentences', this)" class="nav-btn flex flex-col items-center text-stone-400 hover:text-stone-700 transition flex-1 py-1">
+            <span class="text-base">📖</span>
+            <span class="text-[11px] font-extrabold mt-0.5">日常與句型</span>
+        </button>
+        <button onclick="switchTab('tab-story', this)" class="nav-btn flex flex-col items-center text-stone-400 hover:text-stone-700 transition flex-1 py-1">
+            <span class="text-base">🎬</span>
+            <span class="text-[11px] font-extrabold mt-0.5">故事對話</span>
+        </button>
+        <button onclick="switchTab('tab-recorder', this)" class="nav-btn flex flex-col items-center text-stone-400 hover:text-stone-700 transition flex-1 py-1">
+            <span class="text-base">🎤</span>
+            <span class="text-[11px] font-extrabold mt-0.5">錄音練習</span>
+        </button>
+        <button onclick="switchTab('tab-quiz', this)" class="nav-btn flex flex-col items-center text-stone-400 hover:text-stone-700 transition flex-1 py-1">
+            <span class="text-base">🎮</span>
+            <span class="text-[11px] font-extrabold mt-0.5">互動測驗</span>
+        </button>
+    </nav>
+    </div>
 
     <!-- Main Content Container (5 Dedicated Tabs) -->
-    <main class="flex-1 px-4 py-5 pb-32 space-y-4">
+    <main class="flex-1 px-4 md:px-6 py-5 pb-10 space-y-4">
 
         <!-- TAB 1: 單字與發音 (Words & Phonics) -->
         <section id="tab-words-phonics" class="tab-content active space-y-6">
@@ -91,7 +116,7 @@
                     </h2>
                     <p class="text-xs text-stone-400 mt-0.5">點擊卡片聆聽標準發音 🔊</p>
                 </div>
-                <div class="grid grid-cols-2 gap-3" id="color-vocab-grid"></div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3" id="color-vocab-grid"></div>
             </div>
 
             <div class="space-y-3 pt-2">
@@ -102,7 +127,7 @@
                     </h2>
                     <p class="text-xs text-stone-400 mt-0.5">點擊卡片練習字母拼讀與發音 🔊</p>
                 </div>
-                <div class="grid grid-cols-2 gap-3" id="phonics-vocab-grid"></div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3" id="phonics-vocab-grid"></div>
             </div>
         </section>
 
@@ -118,12 +143,12 @@
 
             <div class="space-y-3">
                 <h3 class="text-xs font-bold text-stone-500 uppercase tracking-wider px-1">💬 日常對話 (Daily Talk)</h3>
-                <div class="space-y-2.5" id="dailytalk-list"></div>
+                <div class="space-y-2.5 md:space-y-0 md:grid md:grid-cols-2 md:gap-2.5" id="dailytalk-list"></div>
             </div>
 
             <div class="space-y-3 pt-2">
                 <h3 class="text-xs font-bold text-stone-500 uppercase tracking-wider px-1">📖 句型練習 (Sentences)</h3>
-                <div class="space-y-2.5" id="sentences-list"></div>
+                <div class="space-y-2.5 md:space-y-0 md:grid md:grid-cols-2 md:gap-2.5" id="sentences-list"></div>
             </div>
         </section>
 
@@ -136,11 +161,11 @@
                 </h2>
                 <p class="text-xs text-stone-400 mt-0.5">尋找黑色書包完整 13 句故事對話，點擊隨時聆聽發音</p>
             </div>
-            <div class="space-y-2.5" id="story-list"></div>
+            <div class="space-y-2.5 md:space-y-0 md:grid md:grid-cols-2 md:gap-2.5" id="story-list"></div>
         </section>
 
         <!-- TAB 4: 錄音練習 (Voice Recorder) -->
-        <section id="tab-recorder" class="tab-content space-y-5">
+        <section id="tab-recorder" class="tab-content space-y-5 md:max-w-xl md:mx-auto">
             <div>
                 <h2 class="font-extrabold text-stone-700 text-base flex items-center space-x-2">
                     <span class="w-2.5 h-2.5 rounded-full bg-indigo-300 inline-block"></span>
@@ -178,7 +203,7 @@
         </section>
 
         <!-- TAB 5: 互動測驗 (Quiz Game) -->
-        <section id="tab-quiz" class="tab-content space-y-5">
+        <section id="tab-quiz" class="tab-content space-y-5 md:max-w-xl md:mx-auto">
             <div class="flex items-center justify-between">
                 <div>
                     <h2 class="font-extrabold text-stone-700 text-base flex items-center space-x-2">
@@ -206,32 +231,9 @@
 
     </main>
 
-    <!-- Bottom Navigation Bar (5 Dedicated Tabs) -->
-    <nav aria-label="分頁導航" class="bg-white/95 backdrop-blur-md fixed bottom-0 left-0 right-0 max-w-md mx-auto border-t border-stone-100 px-1 py-3 flex justify-around items-center z-50 shadow-lg">
-        <button onclick="switchTab('tab-words-phonics', this)" aria-current="page" class="nav-btn flex flex-col items-center text-blue-600 transition flex-1 py-1">
-            <span class="text-base">🎨</span>
-            <span class="text-[10px] font-extrabold mt-0.5">單字與發音</span>
-        </button>
-        <button onclick="switchTab('tab-dailytalk-sentences', this)" class="nav-btn flex flex-col items-center text-stone-400 hover:text-stone-700 transition flex-1 py-1">
-            <span class="text-base">📖</span>
-            <span class="text-[10px] font-extrabold mt-0.5">日常與句型</span>
-        </button>
-        <button onclick="switchTab('tab-story', this)" class="nav-btn flex flex-col items-center text-stone-400 hover:text-stone-700 transition flex-1 py-1">
-            <span class="text-base">🎬</span>
-            <span class="text-[10px] font-extrabold mt-0.5">故事對話</span>
-        </button>
-        <button onclick="switchTab('tab-recorder', this)" class="nav-btn flex flex-col items-center text-stone-400 hover:text-stone-700 transition flex-1 py-1">
-            <span class="text-base">🎤</span>
-            <span class="text-[10px] font-extrabold mt-0.5">錄音練習</span>
-        </button>
-        <button onclick="switchTab('tab-quiz', this)" class="nav-btn flex flex-col items-center text-stone-400 hover:text-stone-700 transition flex-1 py-1">
-            <span class="text-base">🎮</span>
-            <span class="text-[10px] font-extrabold mt-0.5">互動測驗</span>
-        </button>
-    </nav>
 
     <!-- Toast Notification -->
-    <div id="toast" role="status" aria-live="polite" class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-stone-800/90 text-white px-4 py-2 rounded-full text-xs font-semibold shadow-xl opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+    <div id="toast" role="status" aria-live="polite" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-stone-800/90 text-white px-4 py-2 rounded-full text-xs font-semibold shadow-xl opacity-0 pointer-events-none transition-opacity duration-300 z-50">
         提示訊息
     </div>
 
