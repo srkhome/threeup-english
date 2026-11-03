@@ -241,6 +241,153 @@
         @media (prefers-reduced-motion: reduce) {
             .card { transition: none; }
         }
+
+        /* ---------- 複習考 ---------- */
+        html { scroll-behavior: smooth; }
+        [hidden] { display: none !important; }
+        .jump {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 10px 24px;
+            background: var(--sun);
+            color: var(--ink);
+            border: 3px solid var(--ink);
+            border-radius: 999px;
+            box-shadow: 0 4px 0 var(--ink);
+            font-weight: 700;
+            font-size: clamp(0.95rem, 2.8vw, 1.1rem);
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .jump:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+
+        .review {
+            margin-top: clamp(28px, 5vw, 52px);
+            background: rgba(255, 248, 231, 0.96);
+            border: 3px solid var(--ink);
+            border-radius: clamp(22px, 4vw, 36px);
+            box-shadow: 0 8px 0 var(--ink);
+            padding: clamp(18px, 4vw, 40px);
+            scroll-margin-top: 16px;
+        }
+        .review h2 { margin: 0; font-size: clamp(1.5rem, 5vw, 2.3rem); line-height: 1.25; }
+        .rv-sub { margin: 8px 0 20px; color: var(--ink-soft); font-size: clamp(0.95rem, 2.6vw, 1.1rem); font-weight: 500; line-height: 1.5; }
+
+        .rv-modes { display: grid; grid-template-columns: 1fr; gap: 14px; }
+        .mode {
+            font: inherit;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 16px 18px;
+            color: var(--ink);
+            border: 3px solid var(--ink);
+            border-radius: 20px;
+            box-shadow: 0 5px 0 var(--ink);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .mode strong { font-size: 1.25rem; }
+        .mode span { font-size: 0.95rem; font-weight: 500; color: var(--ink-soft); }
+        .mode .best { font-weight: 700; color: var(--ink); margin-top: 4px; }
+        .mode.m1 { background: #DCEFFF; }
+        .mode.m2 { background: #DDF5E3; }
+        .mode.m3 { background: #FFF0C2; }
+        .mode:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--ink); }
+        .mode:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--ink); }
+
+        .rv-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+        .rv-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .rv-tag { padding: 2px 12px; border: 2px solid var(--ink); border-radius: 999px; background: #fff; font-weight: 600; font-size: 0.85rem; }
+        .rv-count { font-weight: 700; }
+        .bar { height: 14px; background: #fff; border: 2px solid var(--ink); border-radius: 999px; overflow: hidden; margin-bottom: 18px; }
+        .bar span { display: block; height: 100%; width: 0; background: var(--mint); transition: width 0.3s ease; }
+
+        .rv-q { margin: 0 0 6px; font-size: clamp(1.3rem, 4.2vw, 1.9rem); font-weight: 700; line-height: 1.35; overflow-wrap: anywhere; }
+        .rv-hint { margin: 0 0 12px; color: var(--ink-soft); font-weight: 500; }
+        .listen {
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            margin: 6px 0 16px;
+            padding: 10px 22px;
+            background: var(--sky);
+            color: var(--ink);
+            border: 3px solid var(--ink);
+            border-radius: 999px;
+            box-shadow: 0 4px 0 var(--ink);
+        }
+        .listen:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+
+        .opts { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .opt {
+            font: inherit;
+            font-size: clamp(1.05rem, 3vw, 1.25rem);
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            min-height: 56px;
+            padding: 14px 18px;
+            background: #fff;
+            color: var(--ink);
+            border: 3px solid var(--ink);
+            border-radius: 18px;
+            box-shadow: 0 4px 0 var(--ink);
+            overflow-wrap: anywhere;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .opt:hover:not(:disabled) { background: #FFF3C9; }
+        .opt:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+        .opt:disabled { cursor: default; }
+        .opt.correct { background: #CFF3DB; border-color: #1B7F46; }
+        .opt.wrong { background: #FFD9D4; border-color: #C23B2E; }
+
+        .fb { margin-top: 16px; padding: 12px 16px; border: 3px solid var(--ink); border-radius: 16px; font-weight: 600; line-height: 1.55; }
+        .fb.ok { background: #CFF3DB; }
+        .fb.no { background: #FFE4DF; }
+
+        .rv-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+        .btn {
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 12px 26px;
+            color: var(--ink);
+            background: var(--sun);
+            border: 3px solid var(--ink);
+            border-radius: 999px;
+            box-shadow: 0 4px 0 var(--ink);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .btn.ghost { background: #fff; }
+        .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+
+        .mode:focus-visible, .opt:focus-visible, .btn:focus-visible, .listen:focus-visible, .jump:focus-visible {
+            outline: 4px solid #2563eb;
+            outline-offset: 3px;
+        }
+
+        .rv-result { text-align: center; }
+        .stars { font-size: clamp(2.4rem, 9vw, 3.6rem); letter-spacing: 0.12em; color: var(--sun); -webkit-text-stroke: 1.5px var(--ink); line-height: 1.2; }
+        .score { font-size: clamp(1.7rem, 6vw, 2.6rem); font-weight: 700; margin: 4px 0; }
+        .rv-result .rv-actions { justify-content: center; }
+        .rv-wrong-h { margin: 22px 0 0; font-size: 1.15rem; text-align: left; }
+        .wrong-list { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 10px; text-align: left; }
+        .wrong-list li { background: #fff; border: 2px solid var(--ink); border-radius: 14px; padding: 10px 14px; line-height: 1.55; overflow-wrap: anywhere; }
+        .wrong-list b { color: #1B7F46; }
+
+        @media (min-width: 560px) {
+            .opts { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 640px) {
+            .rv-modes { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .mode, .bar span { transition: none; }
+        }
     </style>
 </head>
 <body>
@@ -293,6 +440,7 @@
             <p class="kicker">Hanlin English Grade 3</p>
             <h1>翰林115三上英文</h1>
             <p class="lead">互動學習網：點一點、聽一聽、說一說！</p>
+            <a class="jump" href="#review">📝 單元一、二複習考</a>
         </header>
 
         <p class="pick"><span>選一個單元開始學習吧</span></p>
@@ -362,10 +510,342 @@
             </ul>
         </main>
 
+        <section class="review" id="review" aria-labelledby="rv-title">
+            <h2 id="rv-title">📝 單元一、二複習考</h2>
+            <p class="rv-sub">三年級程度，有單字、聽力、字母、句型回答和填空。每次 10 題，開始前請先打開聲音！</p>
+
+            <!-- 選擇範圍 -->
+            <div id="rv-menu">
+                <div class="rv-modes">
+                    <button type="button" class="mode m1" data-mode="u1">
+                        <strong>單元一</strong>
+                        <span>What's Your Name?</span>
+                        <span class="best" data-best="u1"></span>
+                    </button>
+                    <button type="button" class="mode m2" data-mode="u2">
+                        <strong>單元二</strong>
+                        <span>How Old Are You?</span>
+                        <span class="best" data-best="u2"></span>
+                    </button>
+                    <button type="button" class="mode m3" data-mode="mix">
+                        <strong>綜合挑戰</strong>
+                        <span>單元一和單元二一起考</span>
+                        <span class="best" data-best="mix"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 作答畫面 -->
+            <div id="rv-play" hidden>
+                <div class="rv-top">
+                    <div class="rv-tags"><span class="rv-tag" id="rv-unit"></span><span class="rv-tag" id="rv-type"></span></div>
+                    <span class="rv-count" id="rv-count"></span>
+                </div>
+                <div class="bar" aria-hidden="true"><span id="rv-bar"></span></div>
+                <h3 class="rv-q" id="rv-q"></h3>
+                <p class="rv-hint" id="rv-hint" hidden></p>
+                <button type="button" class="listen" id="rv-listen" hidden>🔊 聽發音</button>
+                <div class="opts" id="rv-opts"></div>
+                <div class="fb" id="rv-fb" role="status" aria-live="polite" hidden></div>
+                <div class="rv-actions">
+                    <button type="button" class="btn" id="rv-next" hidden>下一題</button>
+                    <button type="button" class="btn ghost" id="rv-quit">離開考試</button>
+                </div>
+            </div>
+
+            <!-- 成績 -->
+            <div id="rv-result" class="rv-result" hidden>
+                <div class="stars" id="rv-stars" aria-hidden="true"></div>
+                <div class="score" id="rv-score"></div>
+                <p class="rv-sub" id="rv-msg"></p>
+                <div id="rv-wrong-wrap" hidden>
+                    <h3 class="rv-wrong-h">這些題目再複習一下：</h3>
+                    <ul class="wrong-list" id="rv-wrong"></ul>
+                </div>
+                <div class="rv-actions">
+                    <button type="button" class="btn" id="rv-again">再考一次</button>
+                    <button type="button" class="btn ghost" id="rv-redo" hidden>只重做錯題</button>
+                    <button type="button" class="btn ghost" id="rv-menu-btn">回選單</button>
+                </div>
+            </div>
+        </section>
+
         <footer>
             <span>🔊 開始前請先打開聲音，建議使用 Chrome 或 Safari</span>
         </footer>
     </div>
 
+
+    <script>
+    (function () {
+        "use strict";
+
+        var TOTAL = 10;
+
+        /* ======== 題庫（單元一、單元二） ======== */
+        var BANK = {
+            u1: [
+                { tag: "單字", prompt: "「魚」的英文是？", options: ["fish", "fan", "goat", "hat"], answer: "fish",
+                  why: "fish 是魚；fan 是扇子，goat 是山羊，hat 是帽子。" },
+                { tag: "單字", prompt: "「帽子」的英文是？", options: ["hand", "hat", "jam", "ink"], answer: "hat",
+                  why: "hat 是帽子；hand 是手，jam 是果醬，ink 是墨水。" },
+                { tag: "聽力", prompt: "聽一聽，你聽到哪一個單字？", say: "goat", needsAudio: true,
+                  options: ["goat", "girl", "jet", "fish"], answer: "goat",
+                  why: "goat 是山羊，開頭是 Gg 的音。" },
+                { tag: "字母", prompt: "哪一個單字是 Ii 開頭的？", options: ["ink", "jam", "hand", "fish"], answer: "ink",
+                  why: "ink（墨水）是 Ii 開頭；jam 是 Jj，hand 是 Hh，fish 是 Ff。" },
+                { tag: "單字", prompt: "jet 的中文是什麼？", say: "jet", options: ["噴射機", "果醬", "帽子", "墨水"], answer: "噴射機",
+                  why: "jet 是噴射機；果醬是 jam。" },
+                { tag: "句型", prompt: "What's your name?", say: "What's your name?", hint: "請選出最適合的回答。",
+                  options: ["My name is Abu.", "I'm fine.", "I'm ten.", "You're welcome."], answer: "My name is Abu.",
+                  why: "別人問你叫什麼名字，要說 My name is ... 或 I'm ...。" },
+                { tag: "句型", prompt: "Hello! How are you?", say: "Hello! How are you?", hint: "請選出最適合的回答。",
+                  options: ["I'm fine.", "My name is Mia.", "I'm ten years old.", "You're welcome."], answer: "I'm fine.",
+                  why: "How are you? 是問「你好嗎？」，可以回答 I'm fine.（我很好）。" },
+                { tag: "聽力", prompt: "聽一聽，這句話是什麼意思？", say: "What's your name?", needsAudio: true,
+                  options: ["你叫什麼名字？", "你幾歲？", "你好嗎？", "謝謝你。"], answer: "你叫什麼名字？",
+                  why: "What's your name? 是在問名字。" },
+                { tag: "打招呼", prompt: "泰國人打招呼時會雙手合十行禮，這個動作叫什麼？", options: ["bow", "wai", "wave", "shake hands"], answer: "wai",
+                  why: "wai 是泰國的合十禮；bow 是鞠躬（日本）；wave 是揮手；shake hands 是握手。" },
+                { tag: "單字", prompt: "girl 的中文是什麼？", say: "girl", options: ["女孩", "山羊", "手", "魚"], answer: "女孩",
+                  why: "girl 是女孩；goat 才是山羊。" },
+                { tag: "單字", prompt: "fan 的中文是什麼？", say: "fan", options: ["扇子", "魚", "手", "帽子"], answer: "扇子",
+                  why: "fan 是扇子（也可以是電風扇）。" },
+                { tag: "聽力", prompt: "聽一聽，你聽到哪一個單字？", say: "hand", needsAudio: true,
+                  options: ["hand", "hat", "fan", "jam"], answer: "hand",
+                  why: "hand 是手，要仔細聽結尾的 d。" }
+            ],
+            u2: [
+                { tag: "數字", prompt: "「六」的英文是？", options: ["six", "seven", "eight", "ten"], answer: "six",
+                  why: "six 是 6。" },
+                { tag: "聽力", prompt: "聽一聽，你聽到的是數字幾？", say: "eight", needsAudio: true,
+                  options: ["7", "8", "9", "10"], answer: "8",
+                  why: "eight 是 8。" },
+                { tag: "數字", prompt: "nine 是數字幾？", say: "nine", options: ["6", "7", "9", "10"], answer: "9",
+                  why: "nine 是 9。" },
+                { tag: "數字", prompt: "「十」的英文是？", options: ["eight", "nine", "ten", "six"], answer: "ten",
+                  why: "ten 是 10。" },
+                { tag: "句型", prompt: "How old are you?", say: "How old are you?", hint: "請選出最適合的回答。",
+                  options: ["I'm ten years old.", "My name is Rocky.", "I'm fine.", "You're welcome."], answer: "I'm ten years old.",
+                  why: "How old are you? 是問年齡，要回答歲數，例如 I'm ten.（我十歲）。" },
+                { tag: "句型", prompt: "Thank you.", say: "Thank you.", hint: "請選出最適合的回答。",
+                  options: ["You're welcome.", "I'm fine.", "How old are you?", "Line up, please."], answer: "You're welcome.",
+                  why: "別人說 Thank you.（謝謝你），我們回答 You're welcome.（不客氣）。" },
+                { tag: "句型", prompt: "Line up, please. 是什麼意思？", say: "Line up, please.",
+                  options: ["請排隊。", "請坐下。", "請安靜。", "請起立。"], answer: "請排隊。",
+                  why: "line up 是排隊，please 是請。" },
+                { tag: "填空", prompt: "How ____ are you?", hint: "選出可以填進空格的字。", after: "How old are you?",
+                  options: ["old", "name", "fine", "six"], answer: "old",
+                  why: "問年齡要說 How old are you?" },
+                { tag: "填空", prompt: "I'm nine ____ old.", hint: "選出可以填進空格的字。", after: "I'm nine years old.",
+                  options: ["years", "year", "are", "how"], answer: "years",
+                  why: "九歲超過一歲，year 後面要加 s，變成 years。" },
+                { tag: "羅馬數字", prompt: "羅馬數字 IX 是數字幾？", options: ["6", "9", "11", "4"], answer: "9",
+                  why: "I 在 X 的左邊，表示 10 減 1，所以 IX 是 9。" },
+                { tag: "字母", prompt: "哪一個單字是 Mm 開頭的？", options: ["monkey", "nose", "key", "lion"], answer: "monkey",
+                  why: "monkey（猴子）是 Mm 開頭；nose 是 Nn，key 是 Kk，lion 是 Ll。" },
+                { tag: "聽力", prompt: "聽一聽，這個單字的中文是什麼？", say: "lion", needsAudio: true,
+                  options: ["獅子", "猴子", "鼻子", "牛奶"], answer: "獅子",
+                  why: "lion 是獅子。" }
+            ]
+        };
+
+        var MODE_NAME = { u1: "單元一", u2: "單元二", mix: "綜合挑戰" };
+        var BEST_KEY = "hanlin115_review_best";
+
+        var synth = ("speechSynthesis" in window) ? window.speechSynthesis : null;
+        var state = { mode: null, list: [], i: 0, score: 0, wrong: [], locked: false, record: true };
+        var bests = {};
+        try { bests = JSON.parse(localStorage.getItem(BEST_KEY) || "{}") || {}; } catch (e) { bests = {}; }
+
+        function $(id) { return document.getElementById(id); }
+
+        function shuffle(arr) {
+            var a = arr.slice();
+            for (var i = a.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var t = a[i]; a[i] = a[j]; a[j] = t;
+            }
+            return a;
+        }
+
+        function speak(text) {
+            if (!synth) return;
+            synth.cancel();
+            var u = new SpeechSynthesisUtterance(text);
+            u.lang = "en-US";
+            u.rate = 0.85;
+            synth.speak(u);
+        }
+        function stopSpeech() { if (synth) synth.cancel(); }
+        function isEnglish(t) { return /^[A-Za-z][A-Za-z'’ ,.!?\-]*$/.test(t); }
+
+        function pool(mode) {
+            var items = [];
+            if (mode === "u1" || mode === "mix") items = items.concat(BANK.u1.map(function (q) { return Object.assign({ unit: 1 }, q); }));
+            if (mode === "u2" || mode === "mix") items = items.concat(BANK.u2.map(function (q) { return Object.assign({ unit: 2 }, q); }));
+            // 瀏覽器不支援語音時，聽力題無法作答，先拿掉
+            if (!synth) items = items.filter(function (q) { return !q.needsAudio; });
+            return items;
+        }
+
+        function showOnly(id) {
+            ["rv-menu", "rv-play", "rv-result"].forEach(function (x) { $(x).hidden = (x !== id); });
+            $("review").scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        function updateBestLabels() {
+            ["u1", "u2", "mix"].forEach(function (m) {
+                var el = document.querySelector('[data-best="' + m + '"]');
+                el.textContent = (typeof bests[m] === "number") ? ("最高分 " + bests[m] + " / " + TOTAL) : "尚未挑戰";
+            });
+        }
+
+        function start(mode, list, record) {
+            state.mode = mode;
+            state.list = list;
+            state.i = 0;
+            state.score = 0;
+            state.wrong = [];
+            state.record = record;
+            showOnly("rv-play");
+            show();
+        }
+
+        function show() {
+            var q = state.list[state.i];
+            state.locked = false;
+            stopSpeech();
+
+            $("rv-unit").textContent = q.unit === 1 ? "單元一" : "單元二";
+            $("rv-type").textContent = q.tag;
+            $("rv-count").textContent = "第 " + (state.i + 1) + " / " + state.list.length + " 題";
+            $("rv-bar").style.width = (state.i / state.list.length * 100) + "%";
+            $("rv-q").textContent = q.prompt;
+
+            var hint = $("rv-hint");
+            hint.textContent = q.hint || "";
+            hint.hidden = !q.hint;
+            $("rv-listen").hidden = !q.say;
+
+            var opts = $("rv-opts");
+            opts.textContent = "";
+            shuffle(q.options).forEach(function (text) {
+                var b = document.createElement("button");
+                b.type = "button";
+                b.className = "opt";
+                b.textContent = text;
+                b.addEventListener("click", function () { choose(b, text); });
+                opts.appendChild(b);
+            });
+
+            $("rv-fb").hidden = true;
+            $("rv-next").hidden = true;
+
+            // 聽力題一出現就自動播放一次（由學生按下按鈕後才會進到這裡，瀏覽器允許播放）
+            if (q.say && q.needsAudio) speak(q.say);
+        }
+
+        function choose(btn, text) {
+            if (state.locked) return;
+            state.locked = true;
+            var q = state.list[state.i];
+            var ok = (text === q.answer);
+
+            Array.prototype.forEach.call($("rv-opts").children, function (b) {
+                b.disabled = true;
+                if (b.textContent === q.answer) b.classList.add("correct");
+            });
+            if (ok) {
+                state.score++;
+            } else {
+                btn.classList.add("wrong");
+                state.wrong.push(q);
+            }
+
+            var fb = $("rv-fb");
+            fb.className = "fb " + (ok ? "ok" : "no");
+            fb.textContent = ok
+                ? "✔ 答對了！" + q.why
+                : "✘ 再加油！正確答案是「" + q.answer + "」。" + q.why;
+            fb.hidden = false;
+
+            $("rv-bar").style.width = ((state.i + 1) / state.list.length * 100) + "%";
+
+            // 答完後念出完整的英文答案，加深印象
+            var after = q.after || (isEnglish(q.answer) ? q.answer : null);
+            if (after) speak(after);
+
+            var next = $("rv-next");
+            next.textContent = (state.i === state.list.length - 1) ? "看成績" : "下一題";
+            next.hidden = false;
+            next.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+
+        function finish() {
+            stopSpeech();
+            var total = state.list.length;
+            var score = state.score;
+            var rate = score / total;
+
+            if (state.record && total === TOTAL && (typeof bests[state.mode] !== "number" || score > bests[state.mode])) {
+                bests[state.mode] = score;
+                try { localStorage.setItem(BEST_KEY, JSON.stringify(bests)); } catch (e) { /* 忽略 */ }
+            }
+            updateBestLabels();
+
+            var n = rate >= 0.9 ? 3 : (rate >= 0.7 ? 2 : 1);
+            $("rv-stars").textContent = "★".repeat(n) + "☆".repeat(3 - n);
+            $("rv-score").textContent = score + " / " + total + " 分";
+            $("rv-msg").textContent = rate >= 0.9 ? "太厲害了！你是英文小達人！"
+                : (rate >= 0.7 ? "很棒！把錯的題目再看一次，就更完美囉！"
+                : "加油！先回去聽聽單字和句型，再挑戰一次吧！");
+
+            var list = $("rv-wrong");
+            list.textContent = "";
+            state.wrong.forEach(function (q) {
+                var li = document.createElement("li");
+                var label = q.say ? ("🔊 " + q.say) : q.prompt;
+                li.appendChild(document.createTextNode(label + "　正確答案："));
+                var b = document.createElement("b");
+                b.textContent = q.answer;
+                li.appendChild(b);
+                list.appendChild(li);
+            });
+            $("rv-wrong-wrap").hidden = state.wrong.length === 0;
+            $("rv-redo").hidden = state.wrong.length === 0;
+
+            showOnly("rv-result");
+        }
+
+        /* ======== 事件 ======== */
+        Array.prototype.forEach.call(document.querySelectorAll(".mode"), function (btn) {
+            btn.addEventListener("click", function () {
+                var mode = btn.getAttribute("data-mode");
+                var items = shuffle(pool(mode)).slice(0, TOTAL);
+                start(mode, items, true);
+            });
+        });
+
+        $("rv-listen").addEventListener("click", function () {
+            var q = state.list[state.i];
+            if (q && q.say) speak(q.say);
+        });
+        $("rv-next").addEventListener("click", function () {
+            state.i++;
+            if (state.i >= state.list.length) finish(); else show();
+        });
+        $("rv-quit").addEventListener("click", function () { stopSpeech(); showOnly("rv-menu"); });
+        $("rv-again").addEventListener("click", function () {
+            start(state.mode, shuffle(pool(state.mode)).slice(0, TOTAL), true);
+        });
+        $("rv-redo").addEventListener("click", function () {
+            start(state.mode, shuffle(state.wrong), false);
+        });
+        $("rv-menu-btn").addEventListener("click", function () { showOnly("rv-menu"); });
+
+        updateBestLabels();
+    })();
+    </script>
 </body>
 </html>
